@@ -1,0 +1,10 @@
+# Backup files
+*~
+*.swp
+\#*\#
+.\#*
+
+# NixOS artefacts
+result
+result-*
+keys.txt
