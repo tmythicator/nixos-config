@@ -1,0 +1,10 @@
+* NixOS configuration
+Welcome to my personal infrastructure repository. This is a fully declarative, reproducible system configuration powered by *NixOS* and *Nix Flakes*.
+
+* Secrets Management
+You might notice files containing ~-----BEGIN AGE ENCRYPTED FILE-----~.
+These are **NOT** private keys. They are encrypted ciphertext.
+
+This repository uses [[https://github.com/getsops/sops][SOPS]] with [[https://github.com/FiloSottile/age][age]] encryption to manage secrets securely via GitOps practices.
+- *~.sops.yaml~*: sops configuration file. It defines the creation rules and maps files to the public keys used for encryption. It contains no secret data itself.
+- *~secrets.yaml~*: Contains the actual secrets encrypted with AES256_GCM. Decryption requires a specific private key stored offline (not in this repo).
