@@ -1,10 +1,20 @@
-# Backup files
+# Editors/OS
 *~
 *.swp
+*.swo
 \#*\#
 .\#*
+.DS_Store
+Thumbs.db
 
-# NixOS artefacts
+# NixOS build artefacts
 result
 result-*
+.direnv/
+.devenv/
+
+# Secrets
 keys.txt
+*.key
+private.key
+creds.json
