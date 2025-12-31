@@ -175,18 +175,6 @@ in
   };
   programs.zsh.enable = true;
 
-  # Home manager setup
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = { inherit inputs user; };
-    users.${user} = {
-      imports = [
-        ./home.nix
-        inputs.sops-nix.homeManagerModules.sops
-      ];
-    };
-  };
 
   # Nix settings
   nix.settings = {
