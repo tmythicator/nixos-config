@@ -31,6 +31,7 @@ in
     htop
     nvitop
     fastfetch
+    ffmpeg
 
     # GUI apps
     firefox
