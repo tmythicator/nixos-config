@@ -74,6 +74,13 @@ in
     package = pkgs.emacs-pgtk; # Override with PGTK for Linux
   };
 
+  programs.zsh = {
+    shellAliases = {
+      update = "sudo nixos-rebuild switch --flake ${homeDir}/Development/nixos-config#nixos-rog";
+      upgrade = "nix flake update --flake ${homeDir}/Development/nixos-config && update";
+    };
+  };
+
   # GNOME settings
   dconf.settings = {
     "org/gnome/desktop/interface" = {
