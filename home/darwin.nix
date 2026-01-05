@@ -21,6 +21,7 @@
     wget
     yt-dlp
     tree-sitter
+    colima # Docker runtime for macOS
   ];
 
   programs.zsh.shellAliases = {

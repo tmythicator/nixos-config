@@ -11,7 +11,10 @@
 
   # Nix configuration ------------------------------------------------------------------------------
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nixpkgs.hostPlatform = "aarch64-darwin";
   nixpkgs.config.allowUnfree = true;
 
@@ -24,30 +27,22 @@
 
     taps = [
       "acrogenesis/macchanger"
-      "daviderestivo/emacs-head"
     ];
 
     brews = [
-      "colima"
-      "docker"
-      "docker-compose"
-      "icu4c@77"
       "acrogenesis/macchanger/macchanger"
     ];
 
     casks = [
-      "antigravity"
       "balenaetcher"
       "emacs-app"
       "gimp"
-      "google-chrome" # Added (requested shared, but works best via Cask on macOS)
+      "google-chrome" # Added (works best via Cask on macOS)
       "keepassxc"
       "libreoffice"
       "openmtp"
       "supercollider"
-      "temurin@17"
       "tor-browser"
-      "tuxguitar"
       "vlc"
     ];
   };
@@ -69,7 +64,7 @@
   # Add ability to use TouchID for sudo authentication
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  programs.zsh.enable = true;  # default shell on catalina
+  programs.zsh.enable = true; # default shell on catalina
 
   system.stateVersion = 6;
 }
