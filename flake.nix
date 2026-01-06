@@ -44,7 +44,7 @@
               home-manager.extraSpecialArgs = { inherit inputs user; };
               home-manager.users.${user} = {
                 imports = [
-                  ./home/linux.nix
+                  ./home/nixos/default.nix
                   inputs.sops-nix.homeManagerModules.sops
                 ];
               };
@@ -66,7 +66,7 @@
               home-manager.extraSpecialArgs = { inherit inputs user; };
               home-manager.users.${user} = {
                 imports = [
-                  ./home/darwin.nix
+                  ./home/macos/default.nix
                   inputs.sops-nix.homeManagerModules.sops
                 ];
               };
