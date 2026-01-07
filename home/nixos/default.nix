@@ -29,6 +29,8 @@ in
     gimp
     vlc
     tauon
+
+    popsicle
   ];
 
   # Sops (Linux specific path mostly, but could be shared if paths were aligned)
