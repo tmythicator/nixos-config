@@ -21,8 +21,8 @@ This configuration targets multiple operating systems using a unified flake.
 ** Home Manager
 User configuration is split to maximize code reuse:
 - *`home/shared.nix`*: Core packages, dotfiles, and shell config shared across all systems.
-- *`home/linux.nix`*: Linux-specific settings (Gnome, media players, unfree packages).
-- *`home/darwin.nix`*: macOS-specific hacks, aliases, and dependencies.
+- *`home/nixos/`*: Linux-specific settings (Gnome, media players, unfree packages).
+- *`home/macos/`*: macOS-specific hacks, aliases, and dependencies.
 
 * Workflow
 ** macOS
