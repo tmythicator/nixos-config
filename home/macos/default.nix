@@ -13,11 +13,7 @@ in
 
   home = {
     username = user;
-    homeDirectory = "/Users/${user}"; # This technically could use homeDir if homeDir wasn't defined using config.home.homeDirectory. Circular dependency risk unless we hardcode path or use mkDefault. Sticking to literal here or use let above.
-    # config.home.homeDirectory is set by home-manager based on username usually, but here it is explicit.
-    # To be safe and simple, we will keep the explicit assignment here as is, or use the let var if we defined it differently.
-    # But wait, 'homeDir' in let comes from 'config.home.homeDirectory'.
-    # So we cannot use 'homeDir' to SET 'home.homeDirectory'.
+    homeDirectory = "/Users/${user}";
   };
 
   # Specific dependencies for macOS
