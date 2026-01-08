@@ -49,7 +49,7 @@
     nodePackages.typescript-language-server
     tailwindcss-language-server
     nixd
-    nixfmt-rfc-style
+    nixfmt
     gopls
   ];
 }
