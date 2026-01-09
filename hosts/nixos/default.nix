@@ -152,10 +152,6 @@ in
           "(?d).thumbnails"
           "*.tmp"
         ];
-        versioning = {
-          type = "simple";
-          params.keep = "5";
-        };
       };
     };
   };
