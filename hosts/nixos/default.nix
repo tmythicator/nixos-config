@@ -32,6 +32,9 @@ in
 
   # Hardware tweaks
   hardware.cpu.amd.updateMicrocode = true;
+  hardware.enableRedistributableFirmware = true;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
   services.fstrim.enable = true;
 
   # No power saving for audio card
