@@ -75,7 +75,7 @@ in
 
   programs.zsh = {
     shellAliases = {
-      update = "sudo nixos-rebuild switch --flake ${flakeDir}#nixos-rog";
+      update = "sudo nixos-rebuild switch --flake ${flakeDir}#sff-icient";
       upgrade = "nix flake update --flake ${flakeDir} && update";
     };
   };

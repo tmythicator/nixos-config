@@ -32,7 +32,7 @@
     in
     {
       nixosConfigurations = {
-        nixos-rog = nixpkgs.lib.nixosSystem {
+        sff-icient = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs user; };
           modules = [

@@ -44,7 +44,7 @@ in
 
   # Network & Host
   networking = {
-    hostName = "nixos-rog";
+    hostName = "sff-icient";
     networkmanager.enable = true;
 
     # Syncthing ports
