@@ -202,9 +202,10 @@ in
     device = "none";
     fsType = "tmpfs";
     options = [
-      "size=1G"
+      "size=8G"
       "mode=700"
       "uid=2000"
+      "gid=100"
     ];
   };
 
