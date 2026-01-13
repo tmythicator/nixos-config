@@ -159,6 +159,16 @@ in
     };
   };
 
+  # Sops System Config
+  sops = {
+    defaultSopsFile = ../../secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "${home}/.config/sops/age/keys.txt";
+    secrets.guest_password = {
+      neededForUsers = true;
+    };
+  };
+
   # User config
   users.users.${user} = {
     isNormalUser = true;
@@ -172,6 +182,35 @@ in
     ];
     shell = pkgs.zsh;
   };
+
+  users.users.guest = {
+    isNormalUser = true;
+    description = "Guest User";
+    uid = 2000;
+    hashedPasswordFile = config.sops.secrets.guest_password.path;
+    extraGroups = [
+      "networkmanager"
+      "audio"
+      "video"
+    ];
+    packages = with pkgs; [
+      firefox
+    ];
+  };
+
+  fileSystems."/home/guest" = {
+    device = "none";
+    fsType = "tmpfs";
+    options = [
+      "size=1G"
+      "mode=700"
+      "uid=2000"
+    ];
+  };
+
+  # Security
+  services.openssh.settings.DenyUsers = [ "guest" ];
+  security.sudo.execWheelOnly = true;
   programs.zsh.enable = true;
 
   # Nix settings
