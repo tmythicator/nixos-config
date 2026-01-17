@@ -24,6 +24,7 @@
       ll = "eza -l --icons --group-directories-first --git";
       cat = "bat --style=plain --paging=never";
       e = "emacsclient -nw";
+      et = "emacs -nw";
       gc = "nix-collect-garbage -d";
     };
 
