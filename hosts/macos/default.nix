@@ -31,11 +31,13 @@
 
     brews = [
       "acrogenesis/macchanger/macchanger"
+      "colima"
+      "docker"
+      "docker-compose"
     ];
 
     casks = [
       "balenaetcher"
-      "docker"
       "emacs-app"
       "gimp"
       "google-chrome" # Added (works best via Cask on macOS)
