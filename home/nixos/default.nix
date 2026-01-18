@@ -25,6 +25,10 @@ in
   home.packages = with pkgs; [
     google-chrome
 
+    # Container Tools
+    docker
+    docker-compose
+
     # Media
     gimp
     vlc

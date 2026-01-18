@@ -24,7 +24,6 @@ in
     curl
     wget
     yt-dlp
-    colima # Docker runtime for macOS
   ];
 
   programs.zsh = {

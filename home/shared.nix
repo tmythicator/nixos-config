@@ -41,10 +41,6 @@
     # Fonts
     nerd-fonts.jetbrains-mono
 
-    # Container Tools
-    docker
-    docker-compose
-
     # LSPs/Formatters
     nodePackages.typescript-language-server
     tailwindcss-language-server
