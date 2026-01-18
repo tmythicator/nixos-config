@@ -37,9 +37,9 @@ in
       upgrade = "nix flake update --flake ${flakeDir} && update";
 
       # Macchanger aliases
-      show-mac = "macchanger -s en0";
-      spoof-mac = "sudo macchanger -r en0";
-      reset-mac = "sudo macchanger -p en0";
+      mac-show = "macchanger -s en0";
+      mac-spoof = "sudo macchanger -r en0";
+      mac-reset = "sudo macchanger -p en0";
     };
   };
 
