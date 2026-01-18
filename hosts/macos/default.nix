@@ -25,12 +25,7 @@
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
 
-    taps = [
-      "acrogenesis/macchanger"
-    ];
-
     brews = [
-      "acrogenesis/macchanger/macchanger"
       "colima"
       "docker"
       "docker-compose"
