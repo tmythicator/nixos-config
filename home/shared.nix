@@ -34,6 +34,8 @@
     # GUI Apps (Shared)
     firefox
     telegram-desktop
+    rclone
+    keepassxc
     antigravity
     audacity
     reaper
