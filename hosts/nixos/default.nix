@@ -23,7 +23,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel setup
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "kvm-amd" ];
 
   # LUKS
@@ -84,7 +84,7 @@ in
     open = true;
     nvidiaPersistenced = true;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
   # Audio
