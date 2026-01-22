@@ -32,7 +32,7 @@
     ffmpeg
 
     # GUI Apps (Shared)
-    firefox
+    (if stdenv.isDarwin then firefox-bin else firefox)
     telegram-desktop
     rclone
     keepassxc
