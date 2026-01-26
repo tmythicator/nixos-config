@@ -18,6 +18,8 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixpkgs-wp-pin.url = "github:nixos/nixpkgs/871b9fd269ff6246794583ce4ee1031e1da71895";
   };
 
   outputs =
@@ -29,12 +31,16 @@
     }@inputs:
     let
       user = "dirge";
+      wp-pkgs = import inputs.nixpkgs-wp-pin {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
     in
     {
       nixosConfigurations = {
         sff-icient = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs user; };
+          specialArgs = { inherit inputs user wp-pkgs; };
           modules = [
             ./hosts/nixos/default.nix
             home-manager.nixosModules.home-manager

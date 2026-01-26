@@ -33,8 +33,10 @@ in
     gimp
     vlc
     tauon
+    pavucontrol
 
     popsicle
+    discord-ptb
   ];
 
   # Sops (Linux specific path mostly, but could be shared if paths were aligned)

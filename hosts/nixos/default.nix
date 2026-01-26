@@ -3,6 +3,7 @@
   pkgs,
   inputs,
   user,
+  wp-pkgs,
   ...
 }:
 let
@@ -232,6 +233,11 @@ in
     ];
   };
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+    (final: prev: {
+      wireplumber = wp-pkgs.wireplumber;
+    })
+  ];
 
   # GC weekly
   nix.gc = {
