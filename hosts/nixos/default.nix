@@ -67,7 +67,7 @@ in
   services.xserver.xkb = {
     layout = "us,de,ru";
     variant = "";
-    options = "grp:ctrl_shift_toggle,ctrl:nocaps";
+    options = "ctrl:nocaps";
   };
 
   # Graphics

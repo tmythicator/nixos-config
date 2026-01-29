@@ -23,7 +23,6 @@
     "org/gnome/desktop/input-sources" = {
       xkb-options = [
         "ctrl:nocaps"
-        "grp:ctrl_shift_toggle"
       ];
     };
 
@@ -39,12 +38,12 @@
     "org/gnome/shell/extensions/just-perfection" = {
       accessibility-menu = false;
       gestures = false;
+      osd = false;
     };
 
     "org/gnome/desktop/wm/keybindings" = {
       switch-group = [ ];
       switch-group-backward = [ ];
-      switch-input-source = [ ];
       switch-input-source-backward = [ ];
     };
 
