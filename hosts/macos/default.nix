@@ -33,10 +33,8 @@
 
     casks = [
       "balenaetcher"
-      "emacs-app"
       "gimp"
       "google-chrome" # Added (works best via Cask on macOS)
-      "keepassxc"
       "libreoffice"
       "openmtp"
       "supercollider"
