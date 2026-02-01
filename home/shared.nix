@@ -12,6 +12,7 @@
     ./programs/zsh.nix
     ./programs/git.nix
     ./programs/emacs.nix
+    ./programs/xdg.nix
   ];
 
   home.sessionVariables = {
