@@ -29,34 +29,50 @@
     };
 
     initContent = ''
-      # Zoxide
-      eval "$(zoxide init zsh)"
-      alias cd="z"
-
-      # FZF (Ctrl+R)
-      source ${pkgs.fzf}/share/fzf/key-bindings.zsh
-      source ${pkgs.fzf}/share/fzf/completion.zsh
-
       # Emacs-mode on
       bindkey -e
 
-      # Alt+W (copy)
+      # Alt+W: Copy region to system clipboard
       wl-copy-region() {
         zle copy-region-as-kill
         print -rn -- $CUTBUFFER | wl-copy
       }
       zle -N wl-copy-region
-      bindkey '\ew' wl-copy-region  # \ew = Alt+W
+      bindkey '\ew' wl-copy-region
 
-      # Ctrl+Y (yank)
+      # Ctrl+W: Smart Cut (Region if selected, Word otherwise)
+      wl-smart-cut() {
+        if ((REGION_ACTIVE)); then
+          zle kill-region
+        else
+          zle backward-kill-word
+        fi
+        print -rn -- $CUTBUFFER | wl-copy
+      }
+      zle -N wl-smart-cut
+      bindkey '^W' wl-smart-cut
+
+      # Ctrl+Y: Paste from system clipboard
       wl-paste-insert() {
         LBUFFER+="$(wl-paste)"
       }
       zle -N wl-paste-insert
       bindkey '^Y' wl-paste-insert
 
-      bindkey '^H' backward-kill-word     # Ctrl+Backspace
+      # Ctrl+Backspace
+      bindkey '^H' backward-kill-word
     '';
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    options = [ "--cmd cd" ];
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   programs.direnv = {
