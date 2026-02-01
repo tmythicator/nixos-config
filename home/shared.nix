@@ -30,6 +30,7 @@
     htop
     fastfetch
     ffmpeg
+    (if stdenv.isLinux then wl-clipboard else null)
 
     # GUI Apps (Shared)
     (if stdenv.isDarwin then firefox-bin else firefox)

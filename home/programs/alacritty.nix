@@ -58,6 +58,19 @@
           white = "#c0caf5";
         };
       };
+
+      keyboard.bindings = [
+        {
+          key = "W";
+          mods = "Alt";
+          action = "Copy";
+        }
+        {
+          key = "Y";
+          mods = "Control";
+          action = "Paste";
+        }
+      ];
     };
   };
 }

@@ -28,40 +28,39 @@
       gc = "nix-collect-garbage -d";
     };
 
-    initContent = ''
-      # Emacs-mode on
-      bindkey -e
+    initContent =
+      let
+        isDarwin = pkgs.stdenv.isDarwin;
+        copyCmd = if isDarwin then "pbcopy" else "wl-copy";
+        pasteCmd = if isDarwin then "pbpaste" else "wl-paste";
+        pastePrimaryCmd = if isDarwin then pasteCmd else "wl-paste --primary";
+      in
+      ''
+        # Emacs-mode on
+        bindkey -e
 
-      # Alt+W: Copy region to system clipboard
-      wl-copy-region() {
-        zle copy-region-as-kill
-        print -rn -- $CUTBUFFER | wl-copy
-      }
-      zle -N wl-copy-region
-      bindkey '\ew' wl-copy-region
+        # Ctrl+W: Smart Cut (Region if selected, Word otherwise)
+        wl-smart-cut() {
+          if ((REGION_ACTIVE)); then
+            zle kill-region
+          else
+            zle backward-kill-word
+          fi
+          print -rn -- $CUTBUFFER | wl-copy
+        }
+        zle -N wl-smart-cut
+        bindkey '^W' wl-smart-cut
 
-      # Ctrl+W: Smart Cut (Region if selected, Word otherwise)
-      wl-smart-cut() {
-        if ((REGION_ACTIVE)); then
-          zle kill-region
-        else
-          zle backward-kill-word
-        fi
-        print -rn -- $CUTBUFFER | wl-copy
-      }
-      zle -N wl-smart-cut
-      bindkey '^W' wl-smart-cut
+        # Ctrl+Y: Paste from system clipboard
+        wl-paste-insert() {
+          LBUFFER+="$(wl-paste)"
+        }
+        zle -N wl-paste-insert
+        bindkey '^Y' wl-paste-insert
 
-      # Ctrl+Y: Paste from system clipboard
-      wl-paste-insert() {
-        LBUFFER+="$(wl-paste)"
-      }
-      zle -N wl-paste-insert
-      bindkey '^Y' wl-paste-insert
-
-      # Ctrl+Backspace
-      bindkey '^H' backward-kill-word
-    '';
+        # Ctrl+Backspace
+        bindkey '^H' backward-kill-word
+      '';
   };
 
   programs.zoxide = {
