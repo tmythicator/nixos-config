@@ -25,6 +25,7 @@
           tree-sitter-go
           tree-sitter-gomod
           tree-sitter-python
+          tree-sitter-clojure
         ]
       )
     }/lib";

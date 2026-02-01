@@ -49,5 +49,7 @@
     nixd
     nixfmt
     gopls
+    clojure
+    clojure-lsp
   ];
 }
