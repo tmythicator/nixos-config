@@ -37,6 +37,7 @@ in
 
     popsicle
     discord-ptb
+    wl-clipboard
   ];
 
   # Sops (Linux specific path mostly, but could be shared if paths were aligned)

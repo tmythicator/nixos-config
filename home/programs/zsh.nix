@@ -40,23 +40,23 @@
         bindkey -e
 
         # Ctrl+W: Smart Cut (Region if selected, Word otherwise)
-        wl-smart-cut() {
+        smart-cut() {
           if ((REGION_ACTIVE)); then
             zle kill-region
           else
             zle backward-kill-word
           fi
-          print -rn -- $CUTBUFFER | wl-copy
+          print -rn -- $CUTBUFFER | ${copyCmd}
         }
-        zle -N wl-smart-cut
-        bindkey '^W' wl-smart-cut
+        zle -N smart-cut
+        bindkey '^W' smart-cut
 
         # Ctrl+Y: Paste from system clipboard
-        wl-paste-insert() {
-          LBUFFER+="$(wl-paste)"
+        paste-insert() {
+          LBUFFER+="$(${pasteCmd})"
         }
-        zle -N wl-paste-insert
-        bindkey '^Y' wl-paste-insert
+        zle -N paste-insert
+        bindkey '^Y' paste-insert
 
         # Ctrl+Backspace
         bindkey '^H' backward-kill-word
@@ -66,7 +66,6 @@
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
-    options = [ "--cmd cd" ];
   };
 
   programs.fzf = {
