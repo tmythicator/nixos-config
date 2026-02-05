@@ -31,6 +31,7 @@
     htop
     fastfetch
     ffmpeg
+    google-cloud-sdk
 
     # GUI Apps (Shared)
     (if stdenv.isDarwin then firefox-bin else firefox)
@@ -40,6 +41,7 @@
     antigravity
     audacity
     reaper
+    mermaid-cli
 
     # Fonts
     nerd-fonts.jetbrains-mono
