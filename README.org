@@ -26,18 +26,19 @@ User configuration is split to maximize code reuse:
 
 * Workflow
 ** macOS
-Bootstrap command:
+To bootstrap a new machine:
 #+BEGIN_SRC bash
-nix run --extra-experimental-features "nix-command flakes" nix-darwin -- switch --flake .#macos
+./install-macos.sh
 #+END_SRC
+(Or manually via `nix run --extra-experimental-features "nix-command flakes" nix-darwin -- switch --flake .#macos`)
 
 Routine update:
 #+BEGIN_SRC bash
 update
 #+END_SRC
 
-** Linux
+** NixOS
 Routine update:
 #+BEGIN_SRC bash
-update
+sudo nixos-rebuild switch --flake .#sff-icient
 #+END_SRC
