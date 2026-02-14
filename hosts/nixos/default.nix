@@ -125,6 +125,12 @@ in
   # Docker
   virtualisation.docker.enable = true;
 
+  # Tor
+  services.tor = {
+    enable = true;
+    client.enable = true;
+  };
+
   # AI agents
   services.ollama = {
     enable = true;
@@ -257,6 +263,9 @@ in
 
     sops
     age
+    # Tor
+    tor-browser
+    nyx
   ];
 
   system.stateVersion = "25.11";
