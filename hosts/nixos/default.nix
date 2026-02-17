@@ -8,6 +8,27 @@
 }:
 let
   home = "/home/${user}";
+
+  eca = pkgs.stdenv.mkDerivation {
+    pname = "eca";
+    version = "0.101.1";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/editor-code-assistant/eca/releases/download/0.101.1/eca-native-static-linux-amd64.zip";
+      sha256 = "1ijv02j9rn5kxfzhki8zi99l1vq018b0c5086m0d1nvy4rk1iwia";
+    };
+
+    nativeBuildInputs = [ pkgs.unzip ];
+
+    unpackPhase = ''
+      unzip $src
+    '';
+
+    installPhase = ''
+      mkdir -p $out/bin
+      install -m755 eca $out/bin/eca
+    '';
+  };
 in
 {
   imports = [
@@ -263,6 +284,11 @@ in
 
     sops
     age
+
+    eca
+
+    python3
+
     # Tor
     tor-browser
     nyx
