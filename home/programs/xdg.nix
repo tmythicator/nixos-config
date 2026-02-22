@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 {
+  xdg.enable = true;
+
   home.sessionVariables = {
     NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/config";
     NPM_CONFIG_CACHE = "${config.xdg.cacheHome}/npm";

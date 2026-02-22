@@ -45,7 +45,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel setup
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelModules = [ "kvm-amd" ];
 
   # LUKS

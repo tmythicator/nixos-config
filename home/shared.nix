@@ -1,5 +1,6 @@
 {
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -13,47 +14,14 @@
     ./programs/git.nix
     ./programs/emacs.nix
     ./programs/xdg.nix
+    ./packages/cli.nix
+    ./packages/gui.nix
+    ./packages/dev.nix
+    ./packages/fonts.nix
   ];
 
   home.sessionVariables = {
     EDITOR = "emacsclient -nw";
     VISUAL = "emacsclient -c -a 'emacs'";
   };
-
-  home.packages = with pkgs; [
-    # CLI Tools
-    eza # better ls
-    bat # cat with highlighting
-    fd # faster find
-    ripgrep
-    fzf # Ctrl+R fuzzy
-    zoxide # better cd
-    htop
-    fastfetch
-    ffmpeg
-    google-cloud-sdk
-
-    # GUI Apps (Shared)
-    (if stdenv.isDarwin then firefox-bin else firefox)
-    telegram-desktop
-    rclone
-    keepassxc
-    antigravity
-    audacity
-    reaper
-    mermaid-cli
-
-    # Fonts
-    nerd-fonts.jetbrains-mono
-
-    # LSPs/Formatters
-    nodePackages.typescript-language-server
-    tailwindcss-language-server
-    nixd
-    nixfmt
-    gopls
-    clojure
-    clojure-lsp
-    pkgs.jdt-language-server
-  ];
 }

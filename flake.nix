@@ -20,6 +20,10 @@
     };
 
     nixpkgs-wp-pin.url = "github:nixos/nixpkgs/871b9fd269ff6246794583ce4ee1031e1da71895";
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -45,6 +49,7 @@
             ./hosts/nixos/default.nix
             home-manager.nixosModules.home-manager
             {
+              nixpkgs.overlays = [ inputs.antigravity-nix.overlays.default ];
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs user; };
@@ -67,6 +72,7 @@
             ./hosts/macos/default.nix
             home-manager.darwinModules.home-manager
             {
+              nixpkgs.overlays = [ inputs.antigravity-nix.overlays.default ];
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs user; };
