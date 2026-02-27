@@ -38,6 +38,7 @@ in
     popsicle
     discord-ptb
     wl-clipboard
+    yt-dlp
   ];
 
   # Sops (Linux specific path mostly, but could be shared if paths were aligned)
