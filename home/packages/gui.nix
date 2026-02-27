@@ -6,7 +6,7 @@
     telegram-desktop
     rclone
     keepassxc
-    google-antigravity
+    (if stdenv.isDarwin then antigravity else google-antigravity)
     audacity
     reaper
     mermaid-cli

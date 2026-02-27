@@ -23,7 +23,6 @@ in
     nodejs
     curl
     wget
-    yt-dlp
   ];
 
   programs.zsh = {
