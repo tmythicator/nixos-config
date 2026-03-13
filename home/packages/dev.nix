@@ -10,5 +10,6 @@
     clojure
     clojure-lsp
     pkgs.jdt-language-server
+    jdk
   ];
 }
