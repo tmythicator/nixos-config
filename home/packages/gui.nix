@@ -10,6 +10,5 @@
     audacity
     reaper
     mermaid-cli
-    eclipses.eclipse-java
   ];
 }

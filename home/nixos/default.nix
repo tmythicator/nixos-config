@@ -24,6 +24,7 @@ in
 
   home.packages = with pkgs; [
     google-chrome
+    eclipses.eclipse-java
 
     # Container Tools
     docker
