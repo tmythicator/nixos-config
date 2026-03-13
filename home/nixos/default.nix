@@ -33,7 +33,7 @@ in
     gimp
     vlc
     tauon
-    helvum
+    crosspipe
 
     popsicle
     discord-ptb
