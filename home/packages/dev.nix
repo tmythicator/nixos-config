@@ -10,6 +10,7 @@
     clojure
     clojure-lsp
     pkgs.jdt-language-server
+    copilot-language-server
     jdk
   ];
 }
