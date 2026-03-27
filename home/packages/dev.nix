@@ -12,5 +12,7 @@
     pkgs.jdt-language-server
     copilot-language-server
     jdk
+
+    jetbrains.idea-oss
   ];
 }
