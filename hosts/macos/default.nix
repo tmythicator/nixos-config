@@ -36,11 +36,13 @@
       "balenaetcher"
       "gimp"
       "google-chrome" # Added (works best via Cask on macOS)
+      "intellij-idea"
       "libreoffice"
       "openmtp"
       "supercollider"
       "tor-browser"
       "vlc"
+      "emacs"
     ];
   };
 

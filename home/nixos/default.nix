@@ -25,6 +25,7 @@ in
   home.packages = with pkgs; [
     google-chrome
     eclipses.eclipse-java
+    jetbrains.idea-oss
 
     # Container Tools
     docker

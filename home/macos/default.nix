@@ -16,13 +16,12 @@ in
     homeDirectory = "/Users/${user}";
   };
 
-  # Specific dependencies for macOS
   home.packages = with pkgs; [
-    # Add macOS specific packages here
     go
     nodejs
     curl
     wget
+    cmake
   ];
 
   programs.zsh = {
@@ -52,5 +51,6 @@ in
     '';
   };
 
-  programs.emacs.package = pkgs.emacs;
+  # Disable Nix-managed Emacs in favor of Homebrew
+  programs.emacs.enable = pkgs.lib.mkForce false;
 }
