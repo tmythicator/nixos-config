@@ -12,5 +12,6 @@
     pkgs.jdt-language-server
     copilot-language-server
     jdk
+    maven
   ];
 }
