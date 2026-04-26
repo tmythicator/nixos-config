@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs; [
     # LSPs/Formatters
-    nodePackages.typescript-language-server
+    typescript-language-server
     tailwindcss-language-server
     nixd
     nixfmt
