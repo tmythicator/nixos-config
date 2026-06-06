@@ -24,6 +24,7 @@
     onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
+    onActivation.extraFlags = [ "--force" ];
 
     brews = [
       "colima"
@@ -42,7 +43,7 @@
       "supercollider"
       "tor-browser"
       "vlc"
-      "emacs"
+      "emacs-app"
     ];
   };
 
