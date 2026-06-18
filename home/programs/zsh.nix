@@ -34,7 +34,7 @@
         isDarwin = pkgs.stdenv.isDarwin;
         copyCmd = if isDarwin then "pbcopy" else "wl-copy";
         pasteCmd = if isDarwin then "pbpaste" else "wl-paste";
-        pastePrimaryCmd = if isDarwin then pasteCmd else "wl-paste --primary";
+        # pastePrimaryCmd = if isDarwin then pasteCmd else "wl-paste --primary";
       in
       ''
         # Emacs-mode on

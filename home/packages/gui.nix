@@ -10,5 +10,7 @@
     audacity
     reaper
     mermaid-cli
+    gthumb
+    darktable
   ];
 }

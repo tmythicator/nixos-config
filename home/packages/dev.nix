@@ -5,11 +5,11 @@
     typescript-language-server
     tailwindcss-language-server
     nixd
-    nixfmt
+    nixfmt-rfc-style
     gopls
     clojure
     clojure-lsp
-    pkgs.jdt-language-server
+    jdt-language-server
     copilot-language-server
     jdk
     maven
