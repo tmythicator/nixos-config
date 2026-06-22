@@ -36,6 +36,7 @@ in
     vlc
     tauon
     crosspipe
+    gthumb
 
     popsicle
     discord-ptb
