@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 let
   homeDir = config.home.homeDirectory;
   sopsKeyFile = "${homeDir}/.config/sops/age/keys.txt";
