@@ -45,7 +45,10 @@
 
   system.configurationRevision = null;
 
-  # System settings --------------------------------------------------------------------------------
+  documentation.enable = false;
+  system.tools.darwin-uninstaller.enable = false;
+
+  # System settings
   system.defaults = {
     dock.autohide = true;
     dock.mru-spaces = false;
