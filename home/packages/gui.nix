@@ -1,15 +1,16 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
     # GUI Apps (Shared)
     (if stdenv.isDarwin then firefox-bin else firefox)
-    telegram-desktop
     rclone
     keepassxc
     antigravity
-    audacity
     reaper
     mermaid-cli
     darktable
+  ] ++ lib.optionals (!stdenv.isDarwin) [
+    audacity
+    telegram-desktop
   ];
 }

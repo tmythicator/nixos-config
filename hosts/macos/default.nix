@@ -3,45 +3,19 @@
   ...
 }:
 {
-  imports = [ ../system-shared.nix ];
+  imports = [
+    ../system-shared.nix
+    ./homebrew.nix
+  ];
 
   users.users.${user} = {
     name = user;
     home = "/Users/${user}";
   };
 
-  # Nix configuration ------------------------------------------------------------------------------
+  # Nix configuration
 
   nixpkgs.hostPlatform = "aarch64-darwin";
-
-  # Enable Homebrew
-  homebrew = {
-    enable = true;
-    onActivation.cleanup = "zap";
-    onActivation.autoUpdate = true;
-    onActivation.upgrade = true;
-    onActivation.extraFlags = [ "--force" ];
-
-    brews = [
-      "colima"
-      "docker"
-      "docker-compose"
-      "yt-dlp"
-    ];
-
-    casks = [
-      "balenaetcher"
-      "gimp"
-      "google-chrome" # Added (works best via Cask on macOS)
-      "intellij-idea"
-      "libreoffice"
-      "openmtp"
-      "supercollider"
-      "tor-browser"
-      "vlc"
-      "emacs-app"
-    ];
-  };
 
   system.configurationRevision = null;
 
