@@ -67,7 +67,6 @@
               home-manager.users.${user} = {
                 imports = [
                   ./home/macos/default.nix
-                  inputs.sops-nix.homeManagerModules.sops
                 ];
               };
             }

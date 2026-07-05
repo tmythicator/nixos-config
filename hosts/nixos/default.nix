@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   user,
   ...
@@ -47,10 +48,6 @@ in
   # Kernel setup
   boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelModules = [ "kvm-amd" ];
-
-  # LUKS
-  boot.initrd.luks.devices."luks-bd45f143-16fe-4860-ada1-c4ec34c7ac11".device =
-    "/dev/disk/by-uuid/bd45f143-16fe-4860-ada1-c4ec34c7ac11";
 
   # Hardware tweaks
   hardware.cpu.amd.updateMicrocode = true;
@@ -302,6 +299,14 @@ in
     # Tor
     tor-browser
     nyx
+  ];
+
+  # Random encrypted swap
+  swapDevices = lib.mkForce [
+    {
+      device = "/dev/disk/by-partuuid/b6a36ff0-d239-4e4f-91ad-b80be70ebae6";
+      randomEncryption.enable = true;
+    }
   ];
 
   system.stateVersion = "25.11";
