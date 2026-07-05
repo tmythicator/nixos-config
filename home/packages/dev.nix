@@ -1,17 +1,27 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    # LSPs/Formatters
-    typescript-language-server
-    tailwindcss-language-server
+    # Nix
     nixd
     nixfmt
+
+    # Go
+    go
     gopls
+
+    # Clojure
     clojure
     clojure-lsp
-    jdt-language-server
-    copilot-language-server
+
+    # Java / Kotlin / Maven
     jdk
+    jdt-language-server
+    kotlin-language-server
     maven
+
+    # JS/TS
+    nodejs
+    typescript-language-server
+    tailwindcss-language-server
   ];
 }

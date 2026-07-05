@@ -17,8 +17,6 @@ in
   };
 
   home.packages = with pkgs; [
-    go
-    nodejs
     curl
     wget
     cmake

@@ -32,6 +32,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ../system-shared.nix
     inputs.home-manager.nixosModules.home-manager
     inputs.sops-nix.nixosModules.sops
   ];
@@ -247,15 +248,9 @@ in
   # Security
   services.openssh.settings.DenyUsers = [ "guest" ];
   security.sudo.execWheelOnly = true;
-  programs.zsh.enable = true;
 
   # Nix settings
   nix.settings = {
-    auto-optimise-store = true;
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
     substituters = [
       "https://cuda-maintainers.cachix.org"
     ];
@@ -280,8 +275,6 @@ in
     curl
     expat
   ];
-
-  nixpkgs.config.allowUnfree = true;
 
   # GC weekly
   nix.gc = {

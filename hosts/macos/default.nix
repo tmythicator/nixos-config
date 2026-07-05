@@ -3,6 +3,8 @@
   ...
 }:
 {
+  imports = [ ../system-shared.nix ];
+
   users.users.${user} = {
     name = user;
     home = "/Users/${user}";
@@ -10,15 +12,7 @@
 
   # Nix configuration ------------------------------------------------------------------------------
 
-  nix.settings = {
-    auto-optimise-store = true;
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-  };
   nixpkgs.hostPlatform = "aarch64-darwin";
-  nixpkgs.config.allowUnfree = true;
 
   # Enable Homebrew
   homebrew = {
@@ -84,8 +78,6 @@
 
   # Add ability to use TouchID for sudo authentication
   security.pam.services.sudo_local.touchIdAuth = true;
-
-  programs.zsh.enable = true; # default shell on catalina
 
   system.stateVersion = 6;
 }
