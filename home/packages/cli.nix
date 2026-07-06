@@ -6,11 +6,10 @@
     bat # cat with highlighting
     fd # faster find
     ripgrep
-    fzf # Ctrl+R fuzzy
-    zoxide # better cd
     htop
     fastfetch
     ffmpeg
     google-cloud-sdk
+    rclone
   ];
 }
