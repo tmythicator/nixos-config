@@ -13,6 +13,7 @@ in
     ../shared.nix
     ../secrets.nix
     ./gnome.nix
+    ../programs/rclone.nix
   ];
 
   home.username = user;
@@ -39,7 +40,6 @@ in
     wl-clipboard
     yt-dlp
   ];
-
 
   # Emacs Daemon (Linux Systemd)
   services.emacs = {
