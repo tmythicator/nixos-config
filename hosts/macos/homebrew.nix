@@ -23,7 +23,7 @@
       "libreoffice"
       "openmtp"
       "supercollider"
-      "telegram-desktop"
+      "telegram"
       "tor-browser"
       "vlc"
       "emacs-app"

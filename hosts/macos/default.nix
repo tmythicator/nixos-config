@@ -19,9 +19,6 @@
 
   system.configurationRevision = null;
 
-  documentation.enable = false;
-  system.tools.darwin-uninstaller.enable = false;
-
   # System settings
   system.defaults = {
     dock.autohide = true;
