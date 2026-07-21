@@ -8,6 +8,9 @@
     onActivation.extraFlags = [ "--force" ];
 
     brews = [
+      "cmake"
+      "libtool"
+      "libvterm"
       "colima"
       "docker"
       "docker-compose"

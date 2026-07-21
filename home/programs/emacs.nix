@@ -3,7 +3,6 @@
   programs.emacs = {
     enable = true;
     extraPackages = epkgs: [
-      epkgs.vterm
       epkgs.treesit-grammars.with-all-grammars
     ];
   };
@@ -14,6 +13,10 @@
     prettier
     shfmt
     shellcheck
+  ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
+    cmake
+    libtool
+    libvterm
   ];
 
   # Symlink tree-sitter grammars so Emacs (Brew or Nix) can find them
