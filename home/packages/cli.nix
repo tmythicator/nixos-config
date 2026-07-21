@@ -11,5 +11,7 @@
     ffmpeg
     google-cloud-sdk
     rclone
+    zip
+    unzip
   ];
 }
