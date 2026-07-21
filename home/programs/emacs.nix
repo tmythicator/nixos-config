@@ -7,17 +7,23 @@
     ];
   };
 
-  home.packages = with pkgs; [
-    emacs-all-the-icons-fonts
+  home.packages =
+    with pkgs;
+    [
+      emacs-all-the-icons-fonts
 
-    prettier
-    shfmt
-    shellcheck
-  ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
-    cmake
-    libtool
-    libvterm
-  ];
+      prettier
+      shfmt
+      shellcheck
+    ]
+    ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
+      # Required for Emacs vterm native module compilation
+      cmake
+      gnumake
+      gcc
+      libtool
+      libvterm
+    ];
 
   # Symlink tree-sitter grammars so Emacs (Brew or Nix) can find them
   # Emacs looks in ~/.emacs.d/var/treesit/ (Doom/Standard)
