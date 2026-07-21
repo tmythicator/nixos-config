@@ -20,6 +20,7 @@
       "gimp"
       "google-chrome"
       "intellij-idea"
+      "keepassxc"
       "libreoffice"
       "openmtp"
       "supercollider"
