@@ -49,6 +49,7 @@
 
     "org/gnome/shell/keybindings" = {
       toggle-application-view = [ ];
+      show-screenshot-ui = [ "<Super>p" ];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
