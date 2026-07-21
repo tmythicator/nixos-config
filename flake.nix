@@ -18,6 +18,8 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    antigravity-nix.url = "github:jacopone/antigravity-nix";
   };
 
   outputs =
@@ -29,6 +31,10 @@
     }@inputs:
     let
       user = "dirge";
+
+      overlay = final: prev: {
+        antigravity = inputs.antigravity-nix.packages.${prev.system}.google-antigravity-ide;
+      };
     in
     {
       nixosConfigurations = {
@@ -39,6 +45,8 @@
             ./hosts/nixos/default.nix
             home-manager.nixosModules.home-manager
             {
+              nixpkgs.overlays = [ overlay ];
+
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs user; };
@@ -61,6 +69,8 @@
             ./hosts/macos/default.nix
             home-manager.darwinModules.home-manager
             {
+              nixpkgs.overlays = [ overlay ];
+
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs user; };
