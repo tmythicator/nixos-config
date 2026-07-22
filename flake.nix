@@ -32,11 +32,14 @@
     let
       user = "dirge";
 
-      overlay = final: prev: {
-        antigravity = inputs.antigravity-nix.packages.${prev.system}.google-antigravity-ide;
-      };
+      overlay = import ./overlays { inherit inputs; };
     in
     {
+      formatter = {
+        x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+        aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-rfc-style;
+      };
+
       nixosConfigurations = {
         sff-icient = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
