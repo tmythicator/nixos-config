@@ -11,11 +11,15 @@
   };
 
   systemd.user.timers.org-sync = {
-    Unit = { Description = "Run org-sync timer"; };
+    Unit = {
+      Description = "Run org-sync timer";
+    };
     Timer = {
       OnBootSec = "3m";
       OnUnitActiveSec = "10m";
     };
-    Install = { WantedBy = [ "timers.target" ]; };
+    Install = {
+      WantedBy = [ "timers.target" ];
+    };
   };
 }
