@@ -50,9 +50,9 @@
   };
 
   # Remap CapsLock to Ctrl
-  system.defaults.keyboard = {
+  system.keyboard = {
     enableKeyMapping = true;
-    remapCapsLockTo = "Control";
+    remapCapsLockToControl = true;
   };
 
   # SKHD for hotkeys
@@ -66,7 +66,7 @@
       cmd - e : emacsclient -c -n || open -a Emacs
 
       # <Super>p -> Screenshot UI
-      cmd - p : screencapture -ui
+      cmd - p : open -a Screenshot
     '';
   };
 
