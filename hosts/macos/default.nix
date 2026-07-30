@@ -48,6 +48,28 @@
     NSGlobalDomain.InitialKeyRepeat = 15;
     NSGlobalDomain.ApplePressAndHoldEnabled = false;
   };
+
+  # Remap CapsLock to Ctrl
+  system.defaults.keyboard = {
+    enableKeyMapping = true;
+    remapCapsLockTo = "Control";
+  };
+
+  # SKHD for hotkeys
+  services.skhd = {
+    enable = true;
+    skhdConfig = ''
+      # <Super>a -> Alacritty
+      cmd - a : open -a Alacritty
+
+      # <Super>e -> Emacs Client
+      cmd - e : emacsclient -c -n || open -a Emacs
+
+      # <Super>p -> Screenshot UI
+      cmd - p : screencapture -ui
+    '';
+  };
+
   system.primaryUser = user;
 
   # Add ability to use TouchID for sudo authentication
