@@ -56,6 +56,7 @@
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
       ];
     };
 
@@ -69,6 +70,12 @@
       binding = "<Super>e";
       command = "emacsclient -c -n";
       name = "Emacs Client";
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+      binding = "<Super><Shift>l";
+      command = "systemctl suspend";
+      name = "Suspend";
     };
   };
 }
