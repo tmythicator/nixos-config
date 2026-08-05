@@ -128,7 +128,14 @@ in
   ];
 
   # Docker
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = false;
+    autoPrune = {
+      enable = true;
+      dates = "weekly";
+    };
+  };
 
   # Tor
   services.tor = {
