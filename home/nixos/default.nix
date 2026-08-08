@@ -47,20 +47,28 @@ in
     };
   };
 
+  xdg.configFile."mimeapps.list".force = true;
+
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
+      # Browser & Web
       "text/html" = [ "firefox.desktop" ];
       "x-scheme-handler/http" = [ "firefox.desktop" ];
       "x-scheme-handler/https" = [ "firefox.desktop" ];
       "x-scheme-handler/about" = [ "firefox.desktop" ];
       "x-scheme-handler/unknown" = [ "firefox.desktop" ];
       "application/pdf" = [ "firefox.desktop" ];
-      "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
-      "image/png" = [ "org.gnome.eog.desktop" ];
-      "image/jpeg" = [ "org.gnome.eog.desktop" ];
+
+      # Messengers
+      "x-scheme-handler/tg" = [ "org.telegram.desktop.desktop" ];
+      "x-scheme-handler/discord" = [ "discord-ptb.desktop" ];
+
+      # Media Players
       "video/mp4" = [ "vlc.desktop" ];
       "video/mkv" = [ "vlc.desktop" ];
+      "audio/mpeg" = [ "tauonmb.desktop" ];
+      "audio/flac" = [ "tauonmb.desktop" ];
     };
   };
 }
