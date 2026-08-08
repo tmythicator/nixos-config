@@ -13,11 +13,25 @@ in
     ../shared.nix
     ../secrets.nix
     ./gnome.nix
+    ../packages/gui-linux.nix
     ../programs/rclone.nix
   ];
 
   home.username = user;
   home.homeDirectory = "/home/${user}";
+
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacs-pgtk;
+  };
+
+  home.packages = with pkgs; [
+    cmake
+    gnumake
+    gcc
+    libtool
+    libvterm
+  ];
 
   # Emacs Daemon (Linux Systemd)
   services.emacs = {
@@ -34,10 +48,6 @@ in
     Restart = "on-failure";
     RestartSec = 3;
     Environment = "DISPLAY=:0";
-  };
-
-  programs.emacs = {
-    package = pkgs.emacs-pgtk; # Override with PGTK for Linux
   };
 
   programs.zsh = {

@@ -42,7 +42,4 @@ in
       }
     '';
   };
-
-  # Disable Nix-managed Emacs in favor of Homebrew
-  programs.emacs.enable = pkgs.lib.mkForce false;
 }
