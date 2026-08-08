@@ -36,6 +36,7 @@
     };
 
     "org/gnome/shell/extensions/just-perfection" = {
+      startup-status = 0;
       accessibility-menu = false;
       gestures = false;
       osd = false;

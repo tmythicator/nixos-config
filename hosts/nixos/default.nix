@@ -27,6 +27,7 @@ in
   # Kernel setup
   boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelParams = [ "nvidia_drm.fbdev=1" ];
 
   # Hardware tweaks
   hardware.cpu.amd.updateMicrocode = true;
@@ -109,6 +110,20 @@ in
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
   programs.dconf.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    config = {
+      common = {
+        default = [ "gnome" "gtk" ];
+        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+      };
+      gnome = {
+        default = [ "gnome" "gtk" ];
+        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+      };
+    };
+  };
 
   environment.gnome.excludePackages = with pkgs; [
     gnome-tour
