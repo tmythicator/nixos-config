@@ -13,8 +13,6 @@
       "libvterm"
       "colima"
       "docker"
-      "docker-compose"
-      "yt-dlp"
     ];
 
     casks = [

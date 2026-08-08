@@ -16,12 +16,6 @@ in
     homeDirectory = "/Users/${user}";
   };
 
-  home.packages = with pkgs; [
-    curl
-    wget
-    cmake
-  ];
-
   programs.zsh = {
     envExtra = ''
       eval "$(/opt/homebrew/bin/brew shellenv)"
