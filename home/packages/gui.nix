@@ -8,7 +8,6 @@
       antigravity
       reaper
       mermaid-cli
-      darktable
     ]
     ++ lib.optionals (!pkgs.stdenv.isDarwin) [
       # Browsers
@@ -19,6 +18,7 @@
 
       # Media
       gimp
+      darktable
       vlc
       tauon
       crosspipe

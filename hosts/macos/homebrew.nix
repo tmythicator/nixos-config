@@ -18,6 +18,7 @@
     casks = [
       "audacity"
       "balenaetcher"
+      "darktable"
       "gimp"
       "google-chrome"
       "intellij-idea"
