@@ -13,5 +13,7 @@
     rclone
     zip
     unzip
+    yt-dlp
+    docker-compose
   ];
 }

@@ -19,28 +19,6 @@ in
   home.username = user;
   home.homeDirectory = "/home/${user}";
 
-  home.packages = with pkgs; [
-    google-chrome
-    eclipses.eclipse-java
-    jetbrains.idea
-
-    # Container Tools
-    docker
-    docker-compose
-
-    # Media
-    gimp
-    vlc
-    tauon
-    crosspipe
-    gthumb
-
-    popsicle
-    discord-ptb
-    wl-clipboard
-    yt-dlp
-  ];
-
   # Emacs Daemon (Linux Systemd)
   services.emacs = {
     enable = true;

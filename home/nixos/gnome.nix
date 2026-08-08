@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  # GNOME utils & Extensions
+  # GNOME utils / Extensions
   home.packages = with pkgs; [
     gnome-tweaks
     gnomeExtensions.dash-to-dock

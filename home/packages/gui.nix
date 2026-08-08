@@ -11,8 +11,25 @@
       darktable
     ]
     ++ lib.optionals (!pkgs.stdenv.isDarwin) [
-      audacity
-      keepassxc
+      # Browsers
+      google-chrome
+      discord-ptb
       telegram-desktop
+      tor-browser
+
+      # Media
+      gimp
+      vlc
+      tauon
+      crosspipe
+      gthumb
+      audacity
+      kooha
+
+      # Dev / Tools
+      eclipses.eclipse-java
+      jetbrains.idea
+      keepassxc
+      popsicle
     ];
 }
