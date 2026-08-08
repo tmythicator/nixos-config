@@ -48,6 +48,10 @@
       switch-input-source-backward = [ ];
     };
 
+    "org/gnome/mutter/keybindings" = {
+      switch-monitor = [ "XF86Display" ];
+    };
+
     "org/gnome/shell/keybindings" = {
       toggle-application-view = [ ];
       show-screenshot-ui = [ "<Super>p" ];
