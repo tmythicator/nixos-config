@@ -13,6 +13,10 @@ in
   imports = [
     ./hardware-configuration.nix
     ../system-shared.nix
+    ./nvidia.nix
+    ./desktop.nix
+    ./audio.nix
+    ./services.nix
     inputs.home-manager.nixosModules.home-manager
     inputs.sops-nix.nixosModules.sops
   ];
@@ -27,7 +31,6 @@ in
   # Kernel setup
   boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelModules = [ "kvm-amd" ];
-  boot.kernelParams = [ "nvidia_drm.fbdev=1" ];
 
   # Hardware tweaks
   hardware.cpu.amd.updateMicrocode = true;
@@ -36,12 +39,7 @@ in
   hardware.bluetooth.powerOnBoot = true;
   services.fstrim.enable = true;
 
-  # No power saving for audio card
-  boot.extraModprobeConfig = ''
-    options snd_hda_intel power_save=0 power_save_controller=N model=dual-codecs
-  '';
-
-  # Network & Host
+  # Network / Host
   networking = {
     hostName = "sff-icient";
     networkmanager.enable = true;
@@ -56,138 +54,16 @@ in
     };
   };
 
-  # Time & Locale
+  # Time / Locale
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Console & Keyboard
+  # Console / Keyboard
   console.useXkbConfig = true;
   services.xserver.xkb = {
     layout = "us,de,ru";
     variant = "";
     options = "ctrl:nocaps";
-  };
-
-  # Graphics
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    powerManagement.finegrained = false;
-    open = true;
-    nvidiaPersistenced = true;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
-  };
-
-  # Audio
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-    extraConfig.pipewire."92-latency" = {
-      "context.properties" = {
-        "default.clock.rate" = 48000;
-        "default.clock.quantum" = 1024;
-        "default.clock.min-quantum" = 512;
-        "default.clock.max-quantum" = 2048;
-      };
-    };
-  };
-
-  # DE
-  services.xserver.enable = true;
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-  programs.dconf.enable = true;
-
-  xdg.portal = {
-    enable = true;
-    config = {
-      common = {
-        default = [ "gnome" "gtk" ];
-        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
-      };
-      gnome = {
-        default = [ "gnome" "gtk" ];
-        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
-      };
-    };
-  };
-
-  environment.gnome.excludePackages = with pkgs; [
-    gnome-tour
-    epiphany
-    geary
-    totem
-    yelp
-    gnome-terminal
-    gnome-console
-    gnome-maps
-    gnome-contacts
-    gnome-music
-    gnome-characters
-    gnome-font-viewer
-    simple-scan
-    gnome-software
-  ];
-
-  # Docker
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = false;
-    autoPrune = {
-      enable = true;
-      dates = "weekly";
-    };
-  };
-
-  # Tor
-  services.tor = {
-    enable = true;
-    client.enable = true;
-  };
-
-  # AI agents
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-cuda;
-  };
-
-  services.syncthing = {
-    enable = true;
-    user = user;
-    group = "users";
-    dataDir = "${home}/.local/share/syncthing";
-    configDir = "${home}/.config/syncthing";
-    overrideDevices = true;
-    overrideFolders = true;
-    settings = {
-      gui.address = "127.0.0.1:8384";
-      devices."pixelham".id = "VJQXYD7-LDRUYNP-WSOTK23-BIXABFW-6WHQVDG-K2DRMU3-ALGSCST-PJ3KAQN";
-      folders."Music" = {
-        id = "670vb-wo9ti";
-        path = "${home}/Music";
-        devices = [ "pixelham" ];
-        ignorePatterns = [
-          ".DS_Store"
-          "thumbs.db"
-          ".stfolder"
-          "(?d).thumbnails"
-          "*.tmp"
-        ];
-      };
-    };
   };
 
   # Sops System Config
@@ -291,10 +167,6 @@ in
     age
 
     python3
-
-    # Tor
-    tor-browser
-    nyx
   ];
 
   # Random encrypted swap
