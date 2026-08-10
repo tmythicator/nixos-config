@@ -13,6 +13,10 @@ in
     ../shared.nix
     ../secrets.nix
     ./gnome.nix
+    ./hyprland.nix
+    ./waybar.nix
+    ./swaync.nix
+    ./theme.nix
     ../packages/gui-linux.nix
     ../programs/rclone.nix
   ];

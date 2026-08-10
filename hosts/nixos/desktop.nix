@@ -1,10 +1,17 @@
 { pkgs, ... }:
 {
-  # DE
+  # DE & WM
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+  services.blueman.enable = true;
   programs.dconf.enable = true;
+  programs.hyprland.enable = true;
+
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+  };
 
   xdg.portal = {
     enable = true;
