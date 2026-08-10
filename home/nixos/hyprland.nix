@@ -1,6 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   palette = import ../palette.nix;
+  stripHash = c: lib.removePrefix "#" c;
 
   switchBuffer = pkgs.writeShellScriptBin "switch-buffer" ''
     ADDR=$(${pkgs.hyprland}/bin/hyprctl clients -j | ${pkgs.jq}/bin/jq -r '.[] | "\(.title) — \(.class) [ws \(.workspace.name)] | \(.address)"' | ${pkgs.fuzzel}/bin/fuzzel -d --prompt "buffer: " | ${pkgs.gawk}/bin/awk -F' \\| ' '{print $NF}')
@@ -94,7 +95,6 @@ in
     screenshotFull
     gnomeSettings
     toggleMic
-    hyprlock
     procps
     jq
     gawk
@@ -123,6 +123,100 @@ in
       "Utility"
       "X-GNOME-Settings-Panel"
     ];
+  };
+
+  # Lockscreen
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      general = {
+        disable_loading_bar = true;
+        hide_cursor = true;
+        grace = 0;
+        no_fade_in = false;
+      };
+
+      background = [
+        {
+          monitor = "";
+          color = "rgb(${stripHash palette.dark.barBg})";
+        }
+      ];
+
+      input-field = [
+        {
+          monitor = "";
+          size = "320, 50";
+          outline_thickness = 2;
+          dots_size = 0.22;
+          dots_spacing = 0.25;
+          dots_center = true;
+          dots_rounding = 2;
+          outer_color = "rgb(${stripHash palette.dark.borderNormal})";
+          inner_color = "rgb(${stripHash palette.dark.cardBg})";
+          font_color = "rgb(${stripHash palette.dark.textMain})";
+          font_family = "JetBrainsMono Nerd Font";
+          fade_on_empty = false;
+          placeholder_text = "<span font_family=\"JetBrainsMono Nerd Font\" foreground=\"#${palette.dark.textMuted}\">ENTER PASSWORD...</span>";
+          hide_input = false;
+          check_color = "rgb(${stripHash palette.dark.accentPrimary})";
+          fail_color = "rgb(${stripHash palette.dark.accentRed})";
+          fail_text = "<span font_family=\"JetBrainsMono Nerd Font\" foreground=\"#${palette.dark.accentRed}\">AUTH FAILED ($ATTEMPTS)</span>";
+          capslock_color = "rgb(${stripHash palette.dark.accentYellow})";
+          position = "0, -80";
+          halign = "center";
+          valign = "center";
+          rounding = 4;
+        }
+      ];
+
+      label = [
+        # Status Badge
+        {
+          monitor = "";
+          text = "󰌾 LOCKED";
+          color = "rgb(${stripHash palette.dark.accentPrimary})";
+          font_size = 14;
+          font_family = "JetBrainsMono Nerd Font Bold";
+          position = "0, 140";
+          halign = "center";
+          valign = "center";
+        }
+        # Time Display
+        {
+          monitor = "";
+          text = "$TIME";
+          color = "rgb(${stripHash palette.dark.textMain})";
+          font_size = 72;
+          font_family = "JetBrainsMono Nerd Font ExtraBold";
+          position = "0, 60";
+          halign = "center";
+          valign = "center";
+        }
+        # Date Display
+        {
+          monitor = "";
+          text = "cmd[update:60000] echo \"$(date +'%A, %d %B %Y' | tr '[:lower:]' '[:upper:]')\"";
+          color = "rgb(${stripHash palette.dark.textMuted})";
+          font_size = 12;
+          font_family = "JetBrainsMono Nerd Font Bold";
+          position = "0, -10";
+          halign = "center";
+          valign = "center";
+        }
+        # User Tag
+        {
+          monitor = "";
+          text = "USER: $USER";
+          color = "rgb(${stripHash palette.dark.accentSecondary})";
+          font_size = 11;
+          font_family = "JetBrainsMono Nerd Font Bold";
+          position = "0, -160";
+          halign = "center";
+          valign = "center";
+        }
+      ];
+    };
   };
 
   home.pointerCursor = {
