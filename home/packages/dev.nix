@@ -13,6 +13,9 @@
     clojure
     clojure-lsp
 
+    # Scheme / Racket
+    racket
+
     # Java / Kotlin / Maven
     jdk
     jdt-language-server
