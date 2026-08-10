@@ -17,6 +17,7 @@
 
     casks = [
       "audacity"
+      "aerospace"
       "balenaetcher"
       "darktable"
       "gimp"

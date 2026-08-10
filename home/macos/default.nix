@@ -9,7 +9,11 @@ let
   flakeDir = "${homeDir}/Development/nixos-config";
 in
 {
-  imports = [ ./../shared.nix ];
+  imports = [
+    ./../shared.nix
+    ./aerospace.nix
+    ./theme.nix
+  ];
 
   home = {
     username = user;
