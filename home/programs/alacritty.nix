@@ -1,8 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   programs.alacritty = {
     enable = true;
     settings = {
+      general.import = [
+        "${config.home.homeDirectory}/.config/alacritty/theme.toml"
+      ];
       terminal.shell.program = "${pkgs.zsh}/bin/zsh";
       env.TERM = "xterm-256color";
 
@@ -30,33 +33,6 @@
           style = "Bold";
         };
         size = 13.0;
-      };
-
-      colors = {
-        primary = {
-          background = "#24283b";
-          foreground = "#c0caf5";
-        };
-        normal = {
-          black = "#1d202f";
-          red = "#f7768e";
-          green = "#9ece6a";
-          yellow = "#e0af68";
-          blue = "#7aa2f7";
-          magenta = "#bb9af7";
-          cyan = "#7dcfff";
-          white = "#a9b1d6";
-        };
-        bright = {
-          black = "#414868";
-          red = "#f7768e";
-          green = "#9ece6a";
-          yellow = "#e0af68";
-          blue = "#7aa2f7";
-          magenta = "#bb9af7";
-          cyan = "#7dcfff";
-          white = "#c0caf5";
-        };
       };
 
       keyboard.bindings = [
