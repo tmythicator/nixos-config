@@ -11,7 +11,6 @@ in
 {
   imports = [
     ./../shared.nix
-    ./aerospace.nix
     ./theme.nix
   ];
 

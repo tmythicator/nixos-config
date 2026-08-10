@@ -60,13 +60,11 @@
     enable = true;
     skhdConfig = ''
       # <Super>a -> Alacritty
-      cmd - a : open -a Alacritty
+      cmd - a : open -n -a Alacritty
 
       # <Super>e -> Emacs Client
       cmd - e : emacsclient -c -n || open -a Emacs
 
-      # <Super>p -> Command Palette
-      cmd - p : open -a Raycast || open -a Spotlight
 
       # <Super>Space -> Cycle input source / languages
       cmd - space : osascript -e 'tell application "System Events" to key code 49 using {control down}'
@@ -77,8 +75,8 @@
       # <Super><Shift>l -> Sleep / Suspend
       cmd + shift - l : pmset sleepnow
 
-      # <Super>s -> Screenshot selection to clipboard
-      cmd - s : screencapture -i -c
+      # <Super>s -> Open Screenshot app
+      cmd - s : open -a Screenshot
 
       # <Super><Shift>s -> Screenshot fullscreen to clipboard
       cmd + shift - s : screencapture -c
@@ -86,6 +84,23 @@
   };
 
   system.primaryUser = user;
+
+  # Emacs daemon launchd service
+  launchd.user.agents.emacs = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/Applications/Emacs.app/Contents/MacOS/Emacs"
+        "--fg-daemon"
+      ];
+      RunAtLoad = true;
+      KeepAlive = true;
+      StandardOutPath = "/tmp/emacs.stdout.log";
+      StandardErrorPath = "/tmp/emacs.stderr.log";
+      EnvironmentVariables = {
+        PATH = "/run/current-system/sw/bin:/etc/profiles/per-user/${user}/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin";
+      };
+    };
+  };
 
   # Add ability to use TouchID for sudo authentication
   security.pam.services.sudo_local.touchIdAuth = true;
