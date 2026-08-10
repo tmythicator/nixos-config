@@ -65,8 +65,23 @@
       # <Super>e -> Emacs Client
       cmd - e : emacsclient -c -n || open -a Emacs
 
-      # <Super>p -> Screenshot UI
-      cmd - p : open -a Screenshot
+      # <Super>p -> Command Palette
+      cmd - p : open -a Raycast || open -a Spotlight
+
+      # <Super>Space -> Cycle input source / languages
+      cmd - space : osascript -e 'tell application "System Events" to key code 49 using {control down}'
+
+      # <Super>l -> Lock Screen
+      cmd - l : pmset displaysleepnow
+
+      # <Super><Shift>l -> Sleep / Suspend
+      cmd + shift - l : pmset sleepnow
+
+      # <Super>s -> Screenshot selection to clipboard
+      cmd - s : screencapture -i -c
+
+      # <Super><Shift>s -> Screenshot fullscreen to clipboard
+      cmd + shift - s : screencapture -c
     '';
   };
 
