@@ -26,6 +26,11 @@
       cat = "bat --style=plain --paging=never";
       e = "emacsclient -nw";
       et = "emacs -nw";
+      er =
+        if pkgs.stdenv.isDarwin then
+          "launchctl kickstart -k gui/$(id -u)/org.nixos.emacs"
+        else
+          "systemctl --user restart emacs";
       gc = "nix-collect-garbage -d";
     };
 
