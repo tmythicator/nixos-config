@@ -8,7 +8,7 @@
       layer = "overlay";
       control-center-layer = "top";
       layer-shell = true;
-      cssPriority = "application";
+      cssPriority = "user";
       control-center-margin-top = 6;
       control-center-margin-bottom = 6;
       control-center-margin-right = 8;
@@ -112,6 +112,18 @@
         color: @text_main;
       }
 
+      .blank-window {
+        background: transparent;
+      }
+
+      window {
+        background: transparent;
+      }
+
+      button {
+        background-image: none;
+      }
+
       .control-center {
         background: @bar_bg;
         border: 2px solid @border_normal;
@@ -148,6 +160,7 @@
         font-weight: 800;
         font-size: 11px;
         box-shadow: 2px 2px 0px 0px @shadow_color;
+        background-image: none;
         transition: all 0.15s ease;
       }
 
@@ -195,6 +208,25 @@
         color: @text_muted;
       }
 
+      .widget-mpris button {
+        background: @card_bg;
+        color: @text_main;
+        border: 2px solid @border_normal;
+        border-radius: 4px;
+        box-shadow: 2px 2px 0px 0px @shadow_color;
+        padding: 4px 6px;
+        margin: 2px;
+        background-image: none;
+        transition: all 0.15s ease;
+      }
+
+      .widget-mpris button:hover {
+        background: @card_hover;
+        border-color: @accent_cyan;
+        color: @accent_cyan;
+        box-shadow: 2px 2px 0px 0px @accent_cyan;
+      }
+
       .widget-volume,
       .widget-backlight {
         background: @card_bg;
@@ -204,6 +236,23 @@
         padding: 8px 12px;
         margin: 6px;
         font-weight: 700;
+      }
+
+      .widget-volume button,
+      .widget-backlight button {
+        background: @card_bg;
+        color: @text_main;
+        border: 2px solid @border_normal;
+        border-radius: 4px;
+        background-image: none;
+        padding: 2px 6px;
+      }
+
+      .widget-volume button:hover,
+      .widget-backlight button:hover {
+        background: @card_hover;
+        border-color: @accent_cyan;
+        color: @accent_cyan;
       }
 
       .widget-volume > trough > highlight,
@@ -219,6 +268,7 @@
 
       .widget-buttons-grid > flowbox > flowboxchild > button {
         background: @card_bg;
+        color: @text_main;
         border: 2px solid @border_normal;
         box-shadow: 3px 3px 0px 0px @shadow_color;
         border-radius: 4px;
@@ -226,6 +276,7 @@
         margin: 3px;
         font-weight: 700;
         letter-spacing: 0.03em;
+        background-image: none;
         transition: all 0.15s ease;
       }
 
