@@ -63,7 +63,7 @@ in
   services.xserver.xkb = {
     layout = "us,de,ru";
     variant = "";
-    options = "ctrl:nocaps";
+    options = "ctrl:nocaps,grp:win_space_toggle";
   };
 
   # Sops System Config

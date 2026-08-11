@@ -204,6 +204,17 @@ in
           halign = "center";
           valign = "center";
         }
+        # Layout Badge
+        {
+          monitor = "";
+          text = "  $LAYOUT[US,DE,RU]";
+          color = "rgb(${stripHash palette.dark.accentPrimary})";
+          font_size = 12;
+          font_family = "JetBrainsMono Nerd Font Bold";
+          position = "0, -135";
+          halign = "center";
+          valign = "center";
+        }
         # User Tag
         {
           monitor = "";
@@ -211,7 +222,7 @@ in
           color = "rgb(${stripHash palette.dark.accentSecondary})";
           font_size = 11;
           font_family = "JetBrainsMono Nerd Font Bold";
-          position = "0, -160";
+          position = "0, -170";
           halign = "center";
           valign = "center";
         }
@@ -304,10 +315,9 @@ in
       # Autostart essential services with palette background
       exec-once = [
         "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "${pkgs.swaybg}/bin/swaybg -c '${palette.dark.barBg}'"
         "hyprctl setcursor Bibata-Modern-Classic 24"
-        "${pkgs.waybar}/bin/waybar"
-        "${pkgs.swaynotificationcenter}/bin/swaync"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
         "${pkgs.blueman}/bin/blueman-applet"
         "${pkgs.hyprpolkitagent}/bin/hyprpolkitagent"
@@ -316,7 +326,7 @@ in
       # Keyboard & Mouse
       input = {
         kb_layout = "us,de,ru";
-        kb_options = "ctrl:nocaps";
+        kb_options = "ctrl:nocaps,grp:win_space_toggle";
         follow_mouse = 1;
         touchpad = {
           natural_scroll = true;
