@@ -3,8 +3,10 @@
   # DE & WM
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = false;
   services.blueman.enable = true;
+  services.udisks2.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   programs.dconf.enable = true;
   programs.hyprland.enable = true;
 
@@ -15,17 +17,14 @@
 
   xdg.portal = {
     enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+    ];
     config = {
       common = {
         default = [
-          "gnome"
-          "gtk"
-        ];
-        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
-      };
-      gnome = {
-        default = [
-          "gnome"
+          "hyprland"
           "gtk"
         ];
         "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];

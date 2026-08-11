@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    # Browsers & Messengers
+    # Browsers / Messengers
     google-chrome
     discord-ptb
     telegram-desktop
@@ -16,6 +16,12 @@
     gthumb
     audacity
     kooha
+
+    # File Manager
+    thunar
+    thunar-archive-plugin
+    tumbler
+    file-roller
 
     # Dev / Tools
     eclipses.eclipse-java

@@ -12,7 +12,7 @@ in
   imports = [
     ../shared.nix
     ../secrets.nix
-    ./gnome.nix
+    # ./gnome.nix
     ./hyprland.nix
     ./waybar.nix
     ./swaync.nix
@@ -66,6 +66,9 @@ in
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
+      # File Manager
+      "inode/directory" = [ "thunar.desktop" ];
+
       # Browser & Web
       "text/html" = [ "firefox.desktop" ];
       "x-scheme-handler/http" = [ "firefox.desktop" ];

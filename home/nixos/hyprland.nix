@@ -255,6 +255,39 @@ in
     };
   };
 
+  # Background Services
+  services.udiskie.enable = true;
+  services.cliphist.enable = true;
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+      };
+
+      listener = [
+        {
+          timeout = 600;
+          on-timeout = "loginctl lock-session";
+        }
+        {
+          timeout = 900;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
+        }
+      ];
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk3";
+    style.name = "adwaita-dark";
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     configType = "hyprlang";
@@ -277,6 +310,7 @@ in
         "${pkgs.swaynotificationcenter}/bin/swaync"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
         "${pkgs.blueman}/bin/blueman-applet"
+        "${pkgs.hyprpolkitagent}/bin/hyprpolkitagent"
       ];
 
       # Keyboard & Mouse
@@ -360,6 +394,7 @@ in
       bind = [
         # Core Controls
         "$mod, P, exec, ${pkgs.fuzzel}/bin/fuzzel"
+        "$mod, V, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel -d --prompt 'clip: ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
         "$mod, A, exec, ${pkgs.alacritty}/bin/alacritty"
         "$mod, E, exec, emacsclient -c -n"
         "$mod, 0, movetoworkspacesilent, special:minimized"

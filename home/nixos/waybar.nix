@@ -18,6 +18,7 @@ in
         modules-left = [
           "hyprland/workspaces"
           "hyprland/window"
+          "mpris"
         ];
 
         modules-center = [
@@ -25,11 +26,11 @@ in
         ];
 
         modules-right = [
+          "cpu"
+          "memory"
           "hyprland/language"
           "pulseaudio"
           "network"
-          "bluetooth"
-          "battery"
           "custom/theme"
           "custom/swaync"
           "tray"
@@ -67,9 +68,46 @@ in
           separate-outputs = true;
         };
 
+        "cpu" = {
+          format = "󰍛 {usage}%";
+          interval = 2;
+          tooltip = true;
+        };
+
+        "memory" = {
+          format = "󰘚 {used:0.1f}G";
+          interval = 3;
+          tooltip-format = "RAM: {used:0.1f}G / {total:0.1f}G ({percentage}%)";
+        };
+
+        "mpris" = {
+          format = "{player_icon} {title}";
+          format-paused = "{status_icon} <i>{title}</i>";
+          ignored-players = [
+            "firefox"
+            "chrome"
+            "chromium"
+            "tor-browser"
+          ];
+          player-icons = {
+            default = "󰎈";
+            tauonmb = "󰎈";
+            vlc = "󰕼";
+            mpv = "🎵";
+          };
+          status-icons = {
+            paused = "󰏤";
+          };
+          tooltip-format = "Player: {player}\nArtist: {artist}\nAlbum: {album}\nTitle: {title}\n\n• Left Click: Play / Pause\n• Right Click: Next Track\n• Middle Click: Prev Track";
+          on-click = "${pkgs.playerctl}/bin/playerctl play-pause";
+          on-click-right = "${pkgs.playerctl}/bin/playerctl next";
+          on-click-middle = "${pkgs.playerctl}/bin/playerctl previous";
+          max-length = 30;
+        };
+
         "clock" = {
-          format = " {:%H:%M}";
-          format-alt = " {:%a, %d %b %Y   %H:%M:%S}";
+          interval = 1;
+          format = " {:%a, %d %b %Y   %H:%M:%S}";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           calendar = {
             mode = "month";
@@ -255,11 +293,12 @@ in
       }
 
       #clock,
+      #cpu,
+      #memory,
+      #mpris,
       #language,
       #pulseaudio,
       #network,
-      #bluetooth,
-      #battery,
       #custom-theme,
       #custom-swaync,
       #tray,
@@ -272,6 +311,17 @@ in
         color: @text_main;
         font-weight: 700;
         transition: all 0.15s ease;
+      }
+
+      #cpu:hover,
+      #memory:hover,
+      #mpris:hover,
+      #pulseaudio:hover,
+      #network:hover {
+        background-color: @card_hover;
+        border-color: @accent_cyan;
+        color: @accent_cyan;
+        box-shadow: 2px 2px 0px 0px @accent_cyan;
       }
 
       #language {
