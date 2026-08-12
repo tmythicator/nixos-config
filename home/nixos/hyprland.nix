@@ -95,20 +95,12 @@ in
     screenshotFull
     gnomeSettings
     toggleMic
-    procps
-    jq
-    gawk
     swaybg
-    wl-clipboard
     grim
     slurp
-    libnotify
     pavucontrol
     networkmanagerapplet
     blueman
-    brightnessctl
-    playerctl
-    wireplumber
     gnome-control-center
   ];
 

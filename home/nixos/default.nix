@@ -17,6 +17,7 @@ in
     ./waybar.nix
     ./swaync.nix
     ./theme.nix
+    ../packages/cli-linux.nix
     ../packages/gui-linux.nix
     ../programs/rclone.nix
   ];

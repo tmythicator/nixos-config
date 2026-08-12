@@ -161,9 +161,6 @@ in
     git
     curl
 
-    wl-clipboard
-    home-manager
-
     sops
     age
 

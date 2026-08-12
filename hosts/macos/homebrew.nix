@@ -13,6 +13,7 @@
       "libvterm"
       "colima"
       "docker"
+      "docker-compose"
     ];
 
     casks = [
