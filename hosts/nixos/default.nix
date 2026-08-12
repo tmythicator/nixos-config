@@ -37,6 +37,7 @@ in
   hardware.enableRedistributableFirmware = true;
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
+  hardware.keyboard.qmk.enable = true;
   services.fstrim.enable = true;
 
   # Network / Host

@@ -26,5 +26,9 @@
     nodejs
     typescript-language-server
     tailwindcss-language-server
+
+    # Hardware / Keyboards
+    vial
+    qmk
   ];
 }
