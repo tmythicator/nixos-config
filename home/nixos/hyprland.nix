@@ -402,9 +402,6 @@ in
         "$mod, L, exec, ${pkgs.hyprlock}/bin/hyprlock"
         "$mod SHIFT, L, exec, ${pkgs.systemd}/bin/systemctl suspend"
 
-        # Keyboard Layout Switcher
-        "$mod, SPACE, exec, ${pkgs.hyprland}/bin/hyprctl switchxkblayout all next"
-
         # Toggle Waybar Visibility
         "$mod, BACKSLASH, exec, ${pkgs.procps}/bin/pkill -SIGUSR1 waybar"
 
