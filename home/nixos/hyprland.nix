@@ -199,7 +199,7 @@ in
         # Layout Badge
         {
           monitor = "";
-          text = "  $LAYOUT[US,DE,RU]";
+          text = "  $LAYOUT[EN,DE,RU]";
           color = "rgb(${stripHash palette.dark.accentPrimary})";
           font_size = 12;
           font_family = "JetBrainsMono Nerd Font Bold";
