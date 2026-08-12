@@ -28,5 +28,6 @@
     jetbrains.idea
     keepassxc
     popsicle
+    zathura
   ];
 }
