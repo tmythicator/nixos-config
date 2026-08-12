@@ -327,7 +327,7 @@ in
       input = {
         kb_layout = "us,de,ru";
         kb_options = "ctrl:nocaps,grp:win_space_toggle";
-        follow_mouse = 1;
+        follow_mouse = 0;
         touchpad = {
           natural_scroll = true;
         };
