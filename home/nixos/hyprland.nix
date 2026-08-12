@@ -237,6 +237,7 @@ in
     size = 24;
     gtk.enable = true;
     x11.enable = true;
+    hyprcursor.enable = true;
   };
 
   gtk = {
@@ -244,11 +245,6 @@ in
     theme = {
       package = pkgs.adw-gtk3;
       name = "adw-gtk3-dark";
-    };
-    cursorTheme = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
-      size = 24;
     };
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
@@ -317,7 +313,6 @@ in
         "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "${pkgs.swaybg}/bin/swaybg -c '${palette.dark.barBg}'"
-        "hyprctl setcursor Bibata-Modern-Classic 24"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
         "${pkgs.blueman}/bin/blueman-applet"
         "${pkgs.hyprpolkitagent}/bin/hyprpolkitagent"

@@ -7,11 +7,9 @@
   services.blueman.enable = true;
   services.udisks2.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  programs.dconf.enable = true;
   programs.hyprland.enable = true;
 
   environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
   };
 
@@ -31,21 +29,4 @@
       };
     };
   };
-
-  environment.gnome.excludePackages = with pkgs; [
-    gnome-tour
-    epiphany
-    geary
-    totem
-    yelp
-    gnome-terminal
-    gnome-console
-    gnome-maps
-    gnome-contacts
-    gnome-music
-    gnome-characters
-    gnome-font-viewer
-    simple-scan
-    gnome-software
-  ];
 }
