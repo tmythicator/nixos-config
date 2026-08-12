@@ -43,7 +43,7 @@ in
 
         "hyprland/language" = {
           format = "  {}";
-          format-en = "US";
+          format-en = "EN";
           format-ru = "RU";
           format-de = "DE";
           keyboard-name = "by-tech-gaming-keyboard";
