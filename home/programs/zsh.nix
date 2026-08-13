@@ -27,7 +27,7 @@
       e = "emacsclient -nw";
       et = "emacs -nw";
       er =
-        if pkgs.stdenv.isDarwin then
+        if pkgs.stdenv.hostPlatform.isDarwin then
           "launchctl kickstart -k gui/$(id -u)/org.nixos.emacs"
         else
           "systemctl --user restart emacs";
@@ -36,7 +36,7 @@
 
     initContent =
       let
-        isDarwin = pkgs.stdenv.isDarwin;
+        isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
         copyCmd = if isDarwin then "pbcopy" else "wl-copy";
         pasteCmd = if isDarwin then "pbpaste" else "wl-paste";
         # pastePrimaryCmd = if isDarwin then pasteCmd else "wl-paste --primary";
