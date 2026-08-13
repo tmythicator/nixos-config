@@ -287,9 +287,26 @@
         box-shadow: 2px 2px 0px 0px @accent_cyan;
       }
 
+      .widget-notifications {
+        background: transparent;
+        margin: 6px;
+      }
+
+      .notification-group {
+        background: transparent;
+      }
+
+      .notification-group-headers {
+        background: transparent;
+        color: @text_muted;
+        font-weight: 700;
+        margin: 4px 0;
+      }
+
       .notification-row {
         outline: none;
-        margin: 6px;
+        background: transparent;
+        margin: 6px 0;
         padding: 0;
       }
 
@@ -340,6 +357,65 @@
         background: @accent_red;
         border-color: @accent_red;
         color: @active_btn_text;
+      }
+
+      .notification-action-buttons {
+        margin-top: 6px;
+        background: transparent;
+      }
+
+      .notification-action-buttons button,
+      .notification-action-button,
+      .notification-default-action,
+      .action-button {
+        background: @card_bg;
+        color: @text_main;
+        border: 2px solid @border_normal;
+        border-radius: 4px;
+        padding: 6px 10px;
+        margin: 3px;
+        font-weight: 700;
+        box-shadow: 2px 2px 0px 0px @shadow_color;
+        background-image: none;
+        transition: all 0.15s ease;
+      }
+
+      .notification-action-buttons button:hover,
+      .notification-action-button:hover,
+      .notification-default-action:hover,
+      .action-button:hover {
+        background: @card_hover;
+        border-color: @accent_cyan;
+        color: @accent_cyan;
+        box-shadow: 2px 2px 0px 0px @accent_cyan;
+      }
+
+      .notification-action-buttons button label,
+      .notification-action-button label,
+      .notification-default-action label,
+      .action-button label {
+        color: inherit;
+      }
+
+      .notification-inline-reply {
+        margin-top: 6px;
+      }
+
+      .notification-inline-reply-entry {
+        background: @card_bg;
+        color: @text_main;
+        border: 2px solid @border_normal;
+        border-radius: 4px;
+        padding: 4px 8px;
+      }
+
+      .notification-inline-reply-button {
+        background: @accent_cyan;
+        color: @active_btn_text;
+        border: 2px solid @border_normal;
+        border-radius: 4px;
+        margin-left: 4px;
+        font-weight: 700;
       }
     '';
   };
