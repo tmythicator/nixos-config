@@ -12,11 +12,29 @@ let
     @define-color shadow_color ${t.shadowColor};
     @define-color card_bg ${t.cardBg};
     @define-color card_hover ${t.cardHover};
+
+    /* Semantic accents */
+    @define-color accent_primary ${t.accentPrimary};
+    @define-color accent_primary_bright ${t.accentPrimaryBright};
+    @define-color accent_secondary ${t.accentSecondary};
+    @define-color accent_secondary_bright ${t.accentSecondaryBright};
+    @define-color accent_success ${t.accentSuccess};
+    @define-color accent_success_bright ${t.accentSuccessBright};
+    @define-color accent_warning ${t.accentWarning};
+    @define-color accent_warning_bright ${t.accentWarningBright};
+    @define-color accent_danger ${t.accentDanger};
+    @define-color accent_danger_bright ${t.accentDangerBright};
+    @define-color accent_info ${t.accentInfo};
+    @define-color accent_info_bright ${t.accentInfoBright};
+
+    /* Compatibility aliases */
     @define-color accent_cyan ${t.accentPrimary};
     @define-color accent_fuchsia ${t.accentSecondary};
-    @define-color accent_green ${t.accentGreen};
-    @define-color accent_yellow ${t.accentYellow};
-    @define-color accent_red ${t.accentRed};
+    @define-color accent_green ${t.accentSuccess};
+    @define-color accent_yellow ${t.accentWarning};
+    @define-color accent_red ${t.accentDanger};
+    @define-color accent_blue ${t.accentInfo};
+
     @define-color active_btn_bg ${t.activeBtnBg};
     @define-color active_btn_text ${t.activeBtnText};
     @define-color active_btn_shadow ${t.activeBtnShadow};
@@ -125,6 +143,8 @@ let
     @define-color headerbar_border_color ${t.borderNormal};
     @define-color card_bg_color ${t.cardBg};
     @define-color card_fg_color ${t.textMain};
+    @define-color card_shade_color ${t.cardHover};
+    @define-color shade_color ${t.shadowColor};
     @define-color dialog_bg_color ${t.barBg};
     @define-color dialog_fg_color ${t.textMain};
     @define-color popover_bg_color ${t.cardBg};
@@ -179,8 +199,13 @@ let
       color: ${t.textMain};
     }
 
-    button {
+    button,
+    button:not(.flat),
+    button.text-button,
+    button.image-button,
+    button.opaque {
       background-color: ${t.cardBg};
+      background-image: none;
       color: ${t.textMain};
       border: 2px solid ${t.borderNormal};
       border-radius: 4px;
@@ -188,8 +213,13 @@ let
       transition: all 0.15s ease;
     }
 
-    button:hover {
+    button:hover,
+    button:not(.flat):hover,
+    button.text-button:hover,
+    button.image-button:hover,
+    button.opaque:hover {
       background-color: ${t.cardHover};
+      background-image: none;
       border-color: ${t.accentPrimary};
       color: ${t.accentPrimary};
       box-shadow: 2px 2px 0px 0px ${t.accentPrimary};

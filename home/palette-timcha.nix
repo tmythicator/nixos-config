@@ -11,8 +11,22 @@
     shadowColor = "#000000";
     cardBg = "#18181b";
     cardHover = "#27272a";
+
+    # Semantic accents
     accentPrimary = "#22d3ee";
+    accentPrimaryBright = "#67e8f9";
     accentSecondary = "#e879f9";
+    accentSecondaryBright = "#f0abfc";
+    accentSuccess = "#4ade80";
+    accentSuccessBright = "#22c55e";
+    accentWarning = "#eab308";
+    accentWarningBright = "#ca8a04";
+    accentDanger = "#f43f5e";
+    accentDangerBright = "#fb7185";
+    accentInfo = "#0891b2";
+    accentInfoBright = "#06b6d4";
+
+    # ANSI terminal color aliases
     accentGreen = "#4ade80";
     accentGreenBright = "#22c55e";
     accentYellow = "#eab308";
@@ -25,12 +39,16 @@
     accentMagentaBright = "#f0abfc";
     accentCyan = "#22d3ee";
     accentCyanBright = "#67e8f9";
+
+    # Interactive elements
     activeBtnBg = "#22d3ee";
     activeBtnText = "#000000";
     activeBtnShadow = "#0e7490";
     brightWhite = "#ffffff";
     accentContrast = "#000000";
     gtkColorScheme = "prefer-dark";
+
+    # Hyprland
     hyprActiveBorder = "rgba(22d3eeff) rgba(e879f9ff) 45deg";
     hyprInactiveBorder = "rgba(27272aff)";
     hyprGroupBorderActive = "rgba(22d3eeff)";
@@ -41,6 +59,7 @@
     hyprBackground = "0x0a0a0a";
     hyprShadow = "rgba(000000aa)";
   };
+
   light = {
     name = "light";
     icon = "";
@@ -53,8 +72,22 @@
     shadowColor = "#000000";
     cardBg = "#f3f4f6";
     cardHover = "#e5e7eb";
+
+    # Semantic accents
     accentPrimary = "#0891b2";
+    accentPrimaryBright = "#06b6d4";
     accentSecondary = "#a21caf";
+    accentSecondaryBright = "#c026d3";
+    accentSuccess = "#15803d";
+    accentSuccessBright = "#22c55e";
+    accentWarning = "#b45309";
+    accentWarningBright = "#ca8a04";
+    accentDanger = "#f43f5e";
+    accentDangerBright = "#c2410c";
+    accentInfo = "#0891b2";
+    accentInfoBright = "#0284c7";
+
+    # ANSI terminal color aliases
     accentGreen = "#15803d";
     accentGreenBright = "#22c55e";
     accentYellow = "#b45309";
@@ -67,12 +100,16 @@
     accentMagentaBright = "#c026d3";
     accentCyan = "#06b6d4";
     accentCyanBright = "#0891b2";
+
+    # Interactive elements
     activeBtnBg = "#22d3ee";
     activeBtnText = "#000000";
     activeBtnShadow = "#0891b2";
     brightWhite = "#171717";
     accentContrast = "#000000";
     gtkColorScheme = "prefer-light";
+
+    # Hyprland
     hyprActiveBorder = "rgba(0891b2ff) rgba(a21cafff) 45deg";
     hyprInactiveBorder = "rgba(000000ff)";
     hyprGroupBorderActive = "rgba(0891b2ff)";

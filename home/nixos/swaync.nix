@@ -144,7 +144,7 @@
       }
 
       .widget-title {
-        color: @accent_cyan;
+        color: @accent_primary;
         font-weight: 800;
         font-size: 13px;
         margin: 6px;
@@ -153,8 +153,8 @@
 
       .widget-title > button {
         background: @card_bg;
-        color: @accent_fuchsia;
-        border: 2px solid @accent_fuchsia;
+        color: @accent_secondary;
+        border: 2px solid @accent_secondary;
         border-radius: 4px;
         padding: 3px 8px;
         font-weight: 800;
@@ -165,9 +165,9 @@
       }
 
       .widget-title > button:hover {
-        background: @accent_fuchsia;
+        background: @accent_secondary;
         color: @active_btn_text;
-        box-shadow: 2px 2px 0px 0px @accent_fuchsia;
+        box-shadow: 2px 2px 0px 0px @accent_secondary;
       }
 
       .widget-dnd {
@@ -186,8 +186,8 @@
       }
 
       .widget-dnd > switch:checked {
-        background: @accent_cyan;
-        border-color: @accent_cyan;
+        background: @accent_primary;
+        border-color: @accent_primary;
       }
 
       .widget-mpris {
@@ -201,7 +201,7 @@
 
       .widget-mpris-title {
         font-weight: 800;
-        color: @accent_cyan;
+        color: @accent_primary;
       }
 
       .widget-mpris-subtitle {
@@ -222,9 +222,9 @@
 
       .widget-mpris button:hover {
         background: @card_hover;
-        border-color: @accent_cyan;
-        color: @accent_cyan;
-        box-shadow: 2px 2px 0px 0px @accent_cyan;
+        border-color: @accent_primary;
+        color: @accent_primary;
+        box-shadow: 2px 2px 0px 0px @accent_primary;
       }
 
       .widget-volume,
@@ -251,8 +251,8 @@
       .widget-volume button:hover,
       .widget-backlight button:hover {
         background: @card_hover;
-        border-color: @accent_cyan;
-        color: @accent_cyan;
+        border-color: @accent_primary;
+        color: @accent_primary;
       }
 
       .widget-volume scale,
@@ -280,7 +280,7 @@
       .widget-backlight trough highlight,
       .widget-volume > trough > highlight,
       .widget-backlight > trough > highlight {
-        background-color: @accent_cyan;
+        background-color: @accent_primary;
         border-radius: 2px;
         min-height: 10px;
       }
@@ -291,7 +291,7 @@
       .widget-backlight slider,
       .widget-volume > trough > slider,
       .widget-backlight > trough > slider {
-        background-color: @accent_fuchsia;
+        background-color: @accent_secondary;
         border: 2px solid @border_normal;
         border-radius: 4px;
         min-width: 14px;
@@ -320,9 +320,9 @@
 
       .widget-buttons-grid > flowbox > flowboxchild > button:hover {
         background: @card_hover;
-        border-color: @accent_cyan;
-        color: @accent_cyan;
-        box-shadow: 2px 2px 0px 0px @accent_cyan;
+        border-color: @accent_primary;
+        color: @accent_primary;
+        box-shadow: 2px 2px 0px 0px @accent_primary;
       }
 
       .widget-notifications {
@@ -358,8 +358,8 @@
       }
 
       .notification:hover {
-        border-color: @accent_cyan;
-        box-shadow: 3px 3px 0px 0px @accent_cyan;
+        border-color: @accent_primary;
+        box-shadow: 3px 3px 0px 0px @accent_primary;
       }
 
       .notification-content {
@@ -368,7 +368,7 @@
 
       .summary {
         font-weight: 800;
-        color: @accent_cyan;
+        color: @accent_primary;
         font-size: 13px;
       }
 
@@ -392,9 +392,25 @@
       }
 
       .close-button:hover {
-        background: @accent_red;
-        border-color: @accent_red;
+        background: @accent_danger;
+        border-color: @accent_danger;
         color: @active_btn_text;
+      }
+
+      .notification-default-action {
+        background: transparent;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .notification-default-action:hover {
+        background: transparent;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
       }
 
       .notification-action-buttons {
@@ -403,11 +419,14 @@
       }
 
       .notification-action-buttons button,
+      .notification-action-buttons .notification-action,
+      .notification-action-buttons .notification-action button,
       .notification-action-button,
-      .notification-default-action,
       .notification-action,
       .action-button,
-      button.notification-action {
+      button.notification-action,
+      .notification-action-buttons > box > button,
+      .notification-action-buttons > flowbox > flowboxchild > button {
         background: @card_bg;
         background-color: @card_bg;
         color: @text_main;
@@ -418,15 +437,21 @@
         font-weight: 700;
         box-shadow: 2px 2px 0px 0px @shadow_color;
         background-image: none;
+        outline: none;
         transition: all 0.15s ease;
       }
 
+      .notification-action-buttons button *,
+      .notification-action-buttons .notification-action *,
+      .notification-action-buttons .notification-action button *,
+      .notification-action-button *,
+      .notification-action *,
+      .action-button *,
+      button.notification-action *,
       .notification-action-buttons button label,
       .notification-action-buttons button GtkLabel,
       .notification-action-button label,
       .notification-action-button GtkLabel,
-      .notification-default-action label,
-      .notification-default-action GtkLabel,
       .notification-action label,
       .notification-action GtkLabel,
       .action-button label,
@@ -434,33 +459,49 @@
       button.notification-action label,
       button.notification-action GtkLabel {
         color: @text_main;
+        background: transparent;
+        background-color: transparent;
+        background-image: none;
+        box-shadow: none;
       }
 
       .notification-action-buttons button:hover,
+      .notification-action-buttons .notification-action:hover,
+      .notification-action-buttons .notification-action button:hover,
       .notification-action-button:hover,
-      .notification-default-action:hover,
       .notification-action:hover,
       .action-button:hover,
-      button.notification-action:hover {
+      button.notification-action:hover,
+      .notification-action-buttons > box > button:hover,
+      .notification-action-buttons > flowbox > flowboxchild > button:hover {
         background: @card_hover;
         background-color: @card_hover;
-        border-color: @accent_cyan;
-        box-shadow: 2px 2px 0px 0px @accent_cyan;
+        color: @accent_primary;
+        border-color: @accent_primary;
+        box-shadow: 2px 2px 0px 0px @accent_primary;
+        background-image: none;
       }
 
+      .notification-action-buttons button:hover *,
+      .notification-action-buttons .notification-action:hover *,
+      .notification-action-buttons .notification-action button:hover *,
+      .notification-action-button:hover *,
+      .notification-action:hover *,
+      .action-button:hover *,
+      button.notification-action:hover *,
       .notification-action-buttons button:hover label,
       .notification-action-buttons button:hover GtkLabel,
       .notification-action-button:hover label,
       .notification-action-button:hover GtkLabel,
-      .notification-default-action:hover label,
-      .notification-default-action:hover GtkLabel,
       .notification-action:hover label,
       .notification-action:hover GtkLabel,
       .action-button:hover label,
       .action-button:hover GtkLabel,
       button.notification-action:hover label,
       button.notification-action:hover GtkLabel {
-        color: @accent_cyan;
+        color: @accent_primary;
+        background: transparent;
+        background-color: transparent;
       }
 
       .notification-inline-reply {
@@ -476,7 +517,7 @@
       }
 
       .notification-inline-reply-button {
-        background: @accent_cyan;
+        background: @accent_primary;
         color: @active_btn_text;
         border: 2px solid @border_normal;
         border-radius: 4px;

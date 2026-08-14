@@ -266,9 +266,9 @@ in
 
       #workspaces button:hover {
         background-color: @card_hover;
-        color: @accent_cyan;
+        color: @accent_primary;
         border-color: @border_active;
-        box-shadow: 2px 2px 0px 0px @accent_cyan;
+        box-shadow: 2px 2px 0px 0px @accent_primary;
       }
 
       #workspaces button.active {
@@ -280,9 +280,9 @@ in
       }
 
       #workspaces button.urgent {
-        background-color: @accent_red;
+        background-color: @accent_danger;
         color: @active_btn_text;
-        border-color: @accent_red;
+        border-color: @accent_danger;
         box-shadow: 2px 2px 0px 0px @shadow_color;
       }
 
@@ -323,30 +323,30 @@ in
       #pulseaudio:hover,
       #network:hover {
         background-color: @card_hover;
-        border-color: @accent_cyan;
-        color: @accent_cyan;
-        box-shadow: 2px 2px 0px 0px @accent_cyan;
+        border-color: @accent_primary;
+        color: @accent_primary;
+        box-shadow: 2px 2px 0px 0px @accent_primary;
       }
 
       #language {
-        color: @accent_cyan;
+        color: @accent_primary;
         font-weight: 800;
       }
 
       #language:hover {
-        border-color: @accent_cyan;
-        box-shadow: 2px 2px 0px 0px @accent_cyan;
+        border-color: @accent_primary;
+        box-shadow: 2px 2px 0px 0px @accent_primary;
       }
 
       #custom-theme {
-        color: @accent_yellow;
+        color: @accent_warning;
         font-weight: 800;
         padding: 2px 8px;
       }
 
       #custom-theme:hover {
-        border-color: @accent_yellow;
-        box-shadow: 2px 2px 0px 0px @accent_yellow;
+        border-color: @accent_warning;
+        box-shadow: 2px 2px 0px 0px @accent_warning;
       }
 
       #clock {
@@ -355,9 +355,9 @@ in
       }
 
       #clock:hover {
-        border-color: @accent_cyan;
-        color: @accent_cyan;
-        box-shadow: 2px 2px 0px 0px @accent_cyan;
+        border-color: @accent_primary;
+        color: @accent_primary;
+        box-shadow: 2px 2px 0px 0px @accent_primary;
       }
 
       #pulseaudio:hover,
@@ -365,9 +365,9 @@ in
       #bluetooth:hover,
       #battery:hover {
         background-color: @card_hover;
-        border-color: @accent_cyan;
-        color: @accent_cyan;
-        box-shadow: 2px 2px 0px 0px @accent_cyan;
+        border-color: @accent_primary;
+        color: @accent_primary;
+        box-shadow: 2px 2px 0px 0px @accent_primary;
       }
 
       #pulseaudio.muted {
@@ -376,41 +376,41 @@ in
       }
 
       #network.disconnected {
-        color: @accent_red;
-        border-color: @accent_red;
+        color: @accent_danger;
+        border-color: @accent_danger;
       }
 
       #battery.charging, #battery.plugged {
-        color: @accent_green;
-        border-color: @accent_green;
+        color: @accent_success;
+        border-color: @accent_success;
       }
 
       #battery.warning:not(.charging) {
-        color: @accent_yellow;
-        border-color: @accent_yellow;
+        color: @accent_warning;
+        border-color: @accent_warning;
       }
 
       #battery.critical:not(.charging) {
-        background-color: @accent_red;
+        background-color: @accent_danger;
         color: @active_btn_text;
-        border-color: @accent_red;
+        border-color: @accent_danger;
         box-shadow: 2px 2px 0px 0px @shadow_color;
       }
 
       #custom-swaync {
-        color: @accent_fuchsia;
+        color: @accent_secondary;
         font-size: 13px;
         padding: 2px 8px;
         border-color: @border_normal;
       }
 
       #custom-swaync:hover {
-        border-color: @accent_fuchsia;
-        box-shadow: 2px 2px 0px 0px @accent_fuchsia;
+        border-color: @accent_secondary;
+        box-shadow: 2px 2px 0px 0px @accent_secondary;
       }
 
       #custom-power {
-        color: @accent_red;
+        color: @accent_danger;
         font-size: 13px;
         padding: 2px 9px;
         margin-right: 4px;
@@ -418,10 +418,10 @@ in
       }
 
       #custom-power:hover {
-        background-color: @accent_red;
+        background-color: @accent_danger;
         color: #000000;
-        border-color: @accent_red;
-        box-shadow: 2px 2px 0px 0px @accent_red;
+        border-color: @accent_danger;
+        box-shadow: 2px 2px 0px 0px @accent_danger;
       }
 
       #tray {
@@ -434,12 +434,12 @@ in
 
       #tray > .needs-attention {
         -gtk-icon-effect: highlight;
-        background-color: @accent_red;
+        background-color: @accent_danger;
       }
 
       tooltip {
         background: @bar_bg;
-        border: 2px solid @accent_cyan;
+        border: 2px solid @accent_primary;
         border-radius: 4px;
         box-shadow: 4px 4px 0px 0px @shadow_color;
       }
