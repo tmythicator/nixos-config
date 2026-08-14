@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 let
-  palette = import ../palette.nix;
-  stripHash = c: lib.removePrefix "#" c;
+  tokens = import ../palette.nix;
+  hyprlandTheme = import ./theme/hyprland.nix { inherit lib; };
 
   switchBuffer = pkgs.writeShellScriptBin "switch-buffer" ''
     ADDR=$(${pkgs.hyprland}/bin/hyprctl clients -j | ${pkgs.jq}/bin/jq -r '.[] | "\(.title) — \(.class) [ws \(.workspace.name)] | \(.address)"' | ${pkgs.fuzzel}/bin/fuzzel -d --prompt "buffer: " | ${pkgs.gawk}/bin/awk -F' \\| ' '{print $NF}')
@@ -120,106 +120,7 @@ in
   # Lockscreen
   programs.hyprlock = {
     enable = true;
-    settings = {
-      general = {
-        disable_loading_bar = true;
-        hide_cursor = true;
-        grace = 0;
-        no_fade_in = false;
-      };
-
-      background = [
-        {
-          monitor = "";
-          color = "rgb(${stripHash palette.dark.barBg})";
-        }
-      ];
-
-      input-field = [
-        {
-          monitor = "";
-          size = "320, 50";
-          outline_thickness = 2;
-          dots_size = 0.22;
-          dots_spacing = 0.25;
-          dots_center = true;
-          dots_rounding = 2;
-          outer_color = "rgb(${stripHash palette.dark.borderNormal})";
-          inner_color = "rgb(${stripHash palette.dark.cardBg})";
-          font_color = "rgb(${stripHash palette.dark.textMain})";
-          font_family = "JetBrainsMono Nerd Font";
-          fade_on_empty = false;
-          placeholder_text = "<span font_family=\"JetBrainsMono Nerd Font\" foreground=\"#${palette.dark.textMuted}\">ENTER PASSWORD...</span>";
-          hide_input = false;
-          check_color = "rgb(${stripHash palette.dark.accentPrimary})";
-          fail_color = "rgb(${stripHash palette.dark.accentRed})";
-          fail_text = "<span font_family=\"JetBrainsMono Nerd Font\" foreground=\"#${palette.dark.accentRed}\">AUTH FAILED ($ATTEMPTS)</span>";
-          capslock_color = "rgb(${stripHash palette.dark.accentYellow})";
-          position = "0, -80";
-          halign = "center";
-          valign = "center";
-          rounding = 4;
-        }
-      ];
-
-      label = [
-        # Status Badge
-        {
-          monitor = "";
-          text = "󰌾 LOCKED";
-          color = "rgb(${stripHash palette.dark.accentPrimary})";
-          font_size = 14;
-          font_family = "JetBrainsMono Nerd Font Bold";
-          position = "0, 140";
-          halign = "center";
-          valign = "center";
-        }
-        # Time Display
-        {
-          monitor = "";
-          text = "$TIME";
-          color = "rgb(${stripHash palette.dark.textMain})";
-          font_size = 72;
-          font_family = "JetBrainsMono Nerd Font ExtraBold";
-          position = "0, 60";
-          halign = "center";
-          valign = "center";
-        }
-        # Date Display
-        {
-          monitor = "";
-          text = "cmd[update:60000] echo \"$(date +'%A, %d %B %Y' | tr '[:lower:]' '[:upper:]')\"";
-          color = "rgb(${stripHash palette.dark.textMuted})";
-          font_size = 12;
-          font_family = "JetBrainsMono Nerd Font Bold";
-          position = "0, -10";
-          halign = "center";
-          valign = "center";
-        }
-        # Layout Badge
-        {
-          monitor = "";
-          text = "  $LAYOUT[EN,DE,RU]";
-          color = "rgb(${stripHash palette.dark.accentPrimary})";
-          font_size = 12;
-          font_family = "JetBrainsMono Nerd Font Bold";
-          position = "0, -135";
-          halign = "center";
-          valign = "center";
-        }
-        # User Tag
-        {
-          monitor = "";
-          text = "USER: $USER";
-          color = "rgb(${stripHash palette.dark.accentSecondary})";
-          font_size = 11;
-          font_family = "JetBrainsMono Nerd Font Bold";
-          position = "0, -170";
-          halign = "center";
-          valign = "center";
-        }
-      ];
-    };
+    settings = hyprlandTheme.mkHyprlockSettings tokens.dark;
   };
 
   home.pointerCursor = {
@@ -251,6 +152,8 @@ in
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       gtk-theme = "adw-gtk3-dark";
+      cursor-theme = "Bibata-Modern-Classic";
+      cursor-size = 24;
     };
   };
 
@@ -290,7 +193,7 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
     configType = "hyprlang";
-    settings = {
+    settings = (hyprlandTheme.mkHyprlandDecoration tokens.dark) // {
       monitor = ",preferred,auto,1";
 
       env = [
@@ -304,7 +207,7 @@ in
       exec-once = [
         "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "${pkgs.swaybg}/bin/swaybg -c '${palette.dark.barBg}'"
+        "${pkgs.swaybg}/bin/swaybg -c '${tokens.dark.barBg}'"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
         "${pkgs.blueman}/bin/blueman-applet"
         "${pkgs.hyprpolkitagent}/bin/hyprpolkitagent"
@@ -317,33 +220,6 @@ in
         follow_mouse = 0;
         touchpad = {
           natural_scroll = true;
-        };
-      };
-
-      general = {
-        gaps_in = 4;
-        gaps_out = 8;
-        border_size = 2;
-        "col.active_border" = palette.dark.hyprActiveBorder;
-        "col.inactive_border" = palette.dark.hyprInactiveBorder;
-        layout = "dwindle";
-      };
-
-      # Decoration
-      decoration = {
-        rounding = 4;
-        blur = {
-          enabled = true;
-          size = 6;
-          passes = 2;
-          new_optimizations = true;
-          ignore_opacity = true;
-        };
-        shadow = {
-          enabled = true;
-          range = 8;
-          render_power = 2;
-          color = palette.dark.hyprShadow;
         };
       };
 
@@ -363,19 +239,6 @@ in
         preserve_split = true;
       };
 
-      group = {
-        "col.border_active" = palette.dark.hyprGroupBorderActive;
-        "col.border_inactive" = palette.dark.hyprGroupBorderInactive;
-        groupbar = {
-          font_family = "JetBrainsMono Nerd Font";
-          font_size = 10;
-          gradients = false;
-          text_color = palette.dark.hyprGroupText;
-          "col.active" = palette.dark.hyprGroupActive;
-          "col.inactive" = palette.dark.hyprGroupInactive;
-        };
-      };
-
       cursor = {
         no_hardware_cursors = true;
       };
@@ -383,7 +246,7 @@ in
       misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
-        background_color = palette.dark.hyprBackground;
+        background_color = tokens.dark.hyprBackground;
       };
 
       "$mod" = "SUPER";

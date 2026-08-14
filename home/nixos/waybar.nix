@@ -1,7 +1,4 @@
 { pkgs, config, ... }:
-let
-  palette = import ../palette.nix;
-in
 {
   programs.waybar = {
     enable = true;
@@ -119,11 +116,11 @@ in
             weeks-pos = "right";
             on-scroll = 1;
             format = {
-              months = "<span color='${palette.dark.accentPrimary}'><b>{}</b></span>";
-              days = "<span color='${palette.dark.textMain}'><b>{}</b></span>";
-              weeks = "<span color='${palette.dark.textMuted}'><b>W{}</b></span>";
-              weekdays = "<span color='${palette.dark.accentSecondary}'><b>{}</b></span>";
-              today = "<span color='${palette.dark.accentPrimary}'><b><u>{}</u></b></span>";
+              months = "<b>{}</b>";
+              days = "{}";
+              weeks = "<i>W{}</i>";
+              weekdays = "<b>{}</b>";
+              today = "<b><u>{}</u></b>";
             };
           };
         };

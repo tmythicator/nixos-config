@@ -16,7 +16,7 @@ in
     ./hyprland.nix
     ./waybar.nix
     ./swaync.nix
-    ./theme.nix
+    ./theme
     ../packages/cli-linux.nix
     ../packages/gui-linux.nix
     ../programs/rclone.nix
