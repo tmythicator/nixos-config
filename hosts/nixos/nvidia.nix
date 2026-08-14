@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 {
-  # NVIDIA DRM kernel framebuffer
-  boot.kernelParams = [ "nvidia_drm.fbdev=1" ];
+  # NVIDIA DRM kernel framebuffer and modesetting
+  boot.kernelParams = [
+    "nvidia-drm.modeset=1"
+    "nvidia_drm.fbdev=1"
+  ];
 
   # Video Drivers & Graphics acceleration
   services.xserver.videoDrivers = [ "nvidia" ];

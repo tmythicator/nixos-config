@@ -8,6 +8,7 @@
   services.udisks2.enable = true;
   services.gnome.gnome-keyring.enable = true;
   programs.hyprland.enable = true;
+  security.pam.services.hyprlock = { };
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
