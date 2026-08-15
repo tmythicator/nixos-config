@@ -32,6 +32,7 @@
       "tor-browser"
       "vlc"
       "emacs-app"
+      "vial"
     ];
   };
 }

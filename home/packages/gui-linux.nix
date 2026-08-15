@@ -29,5 +29,6 @@
     keepassxc
     popsicle
     zathura
+    vial
   ];
 }
