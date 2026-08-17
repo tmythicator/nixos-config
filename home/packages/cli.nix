@@ -14,5 +14,7 @@
     zip
     unzip
     yt-dlp
+    cloudflared
+    openssl
   ];
 }
