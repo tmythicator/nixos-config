@@ -59,13 +59,6 @@
   services.skhd = {
     enable = true;
     skhdConfig = ''
-      # <Super>a -> Alacritty
-      cmd - a : open -n -a Alacritty
-
-      # <Super>e -> Emacs Client
-      cmd - e : emacsclient -c -n || open -a Emacs
-
-
       # <Super>Space -> Cycle input source / languages
       cmd - space : osascript -e 'tell application "System Events" to key code 49 using {control down}'
 
@@ -74,9 +67,6 @@
 
       # <Super><Shift>l -> Sleep / Suspend
       cmd + shift - l : pmset sleepnow
-
-      # <Super>s -> Open Screenshot app
-      cmd - s : open -a Screenshot
 
       # <Super><Shift>s -> Screenshot fullscreen to clipboard
       cmd + shift - s : screencapture -c

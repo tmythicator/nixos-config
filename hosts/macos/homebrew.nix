@@ -17,7 +17,7 @@
     ];
 
     casks = [
-      "rectangle"
+      "aerospace"
       "audacity"
       "balenaetcher"
       "darktable"

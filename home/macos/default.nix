@@ -12,6 +12,7 @@ in
   imports = [
     ./../shared.nix
     ./theme.nix
+    ./aerospace.nix
   ];
 
   home = {
