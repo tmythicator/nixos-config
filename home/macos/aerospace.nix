@@ -1,13 +1,23 @@
 { ... }:
 {
   home.file.".aerospace.toml".text = ''
+    # Config version for compatibility and deprecations
+    config-version = 2
+
     # Automatically start AeroSpace on login
     start-at-login = true
 
+    # Normalization
+    enable-normalization-flatten-containers = true
+    enable-normalization-opposite-orientation-for-nested-containers = true
+
     # Layout
-    default-root-node-layout = 'tiles'
-    default-root-node-orientation = 'auto'
+    default-root-container-layout = 'tiles'
+    default-root-container-orientation = 'auto'
     automatically-unhide-macos-hidden-apps = true
+
+    # Mouse follows focus when focused monitor changes
+    on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
     # Gaps
     [gaps]
@@ -18,11 +28,9 @@
     outer.top        = 8
     outer.right      = 8
 
-    # Mouse
+    # Exec
     [exec]
     inherit-env-vars = true
-
-    on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
     # Window filter rules
     [[on-window-detected]]
@@ -42,14 +50,13 @@
 
     # Core Applications
     alt-a = 'exec-and-forget open -n -a Alacritty'
-    alt-t = 'exec-and-forget open -n -a Alacritty'
-    alt-enter = 'exec-and-forget open -n -a Alacritty'
-    alt-e = 'exec-and-forget emacsclient -c -n || open -a Emacs'
+    alt-t = 'exec-and-forget open -n -a Alacritty --args -e /bin/zsh -l -c "emacsclient -nw"'
+    alt-e = 'exec-and-forget open -a Emacs'
     alt-p = 'exec-and-forget open -a Raycast || osascript -e "tell application \"System Events\" to key code 49 using {command down}"'
 
     # Window State
     alt-k = 'close'
-    alt-return = 'fullscreen'
+    alt-enter = 'fullscreen'
     alt-g = 'layout tiles horizontal vertical'
     alt-shift-space = 'layout floating tiling'
     alt-shift-r = 'reload-config'
@@ -117,12 +124,12 @@
     # Submap: emacs_x
     [mode.emacs_x.binding]
     1 = ['fullscreen', 'mode main']
-    2 = ['split vertical', 'mode main']
-    3 = ['split horizontal', 'mode main']
+    2 = ['join-with down', 'mode main']
+    3 = ['join-with right', 'mode main']
     k = ['close', 'mode main']
     o = ['focus right', 'mode main']
     0 = ['move-node-to-workspace 9', 'mode main']
-    b = ['exec-and-forget open -n -a Alacritty', 'mode main']
+    b = ['exec-and-forget open -g "raycast://extensions/raycast/navigation/search-windows"', 'mode main']
     t = ['layout tiles horizontal vertical', 'mode main']
     esc = 'mode main'
     g = 'mode main'

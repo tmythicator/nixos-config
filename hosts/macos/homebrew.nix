@@ -7,6 +7,10 @@
     onActivation.upgrade = true;
     onActivation.extraFlags = [ "--force" ];
 
+    taps = [
+      "nikitabobko/tap"
+    ];
+
     brews = [
       "cmake"
       "libtool"
@@ -17,7 +21,7 @@
     ];
 
     casks = [
-      "aerospace"
+      "nikitabobko/tap/aerospace"
       "audacity"
       "balenaetcher"
       "darktable"

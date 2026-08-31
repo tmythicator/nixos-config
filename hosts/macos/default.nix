@@ -19,6 +19,11 @@
 
   system.configurationRevision = null;
 
+  environment.systemPath = [
+    "/Applications/Emacs.app/Contents/MacOS"
+    "/Applications/Emacs.app/Contents/MacOS/bin"
+  ];
+
   # System settings
   system.defaults = {
     dock.autohide = true;
