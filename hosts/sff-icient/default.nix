@@ -17,7 +17,6 @@ in
     ./desktop.nix
     ./audio.nix
     ./services.nix
-    inputs.home-manager.nixosModules.home-manager
     inputs.sops-nix.nixosModules.sops
   ];
 

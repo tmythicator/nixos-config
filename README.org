@@ -21,7 +21,7 @@ sops -d secrets.yaml
 This configuration targets multiple operating systems using a unified flake.
 
 ** Hosts
-- *NixOS (`sff-icient`)*: Main Linux workstation. Config in `hosts/nixos`.
+- *NixOS (`sff-icient`)*: Main Linux workstation. Config in `hosts/sff-icient`.
 - *macOS (`macos`)*: MacBook environment managed by `nix-darwin`. Config in `hosts/macos`.
   - Integrates with Homebrew for GUI apps and casks.
   - Usage: `update` alias (runs `nix-darwin switch`).

@@ -45,7 +45,7 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs user; };
           modules = [
-            ./hosts/nixos/default.nix
+            ./hosts/sff-icient/default.nix
             home-manager.nixosModules.home-manager
             {
               nixpkgs.overlays = [ overlay ];
