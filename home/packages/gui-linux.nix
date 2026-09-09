@@ -18,9 +18,6 @@
     kooha
 
     # File Manager
-    thunar
-    thunar-archive-plugin
-    tumbler
     file-roller
 
     # Dev / Tools

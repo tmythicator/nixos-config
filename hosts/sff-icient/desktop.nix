@@ -6,7 +6,18 @@
   services.desktopManager.gnome.enable = false;
   services.blueman.enable = true;
   services.udisks2.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
   services.gnome.gnome-keyring.enable = true;
+
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+
   programs.hyprland.enable = true;
   security.pam.services.hyprlock = { };
 
