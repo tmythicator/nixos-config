@@ -16,11 +16,21 @@
     # Scheme / Racket
     racket
 
-    # Java / Kotlin / Maven
+    # Java / Kotlin
     jdk
     jdt-language-server
+    kotlin
     kotlin-language-server
+    ktlint
+    gradle
     maven
+
+    # Rust
+    rustc
+    cargo
+    rust-analyzer
+    clippy
+    rustfmt
 
     # JS/TS
     nodejs
