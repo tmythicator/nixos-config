@@ -1,4 +1,4 @@
-{ pkgs, user, ... }:
+{ pkgs, pkgs-cuda, user, ... }:
 let
   home = "/home/${user}";
 in
@@ -23,7 +23,7 @@ in
   # AI agents
   services.ollama = {
     enable = true;
-    package = pkgs.ollama-cuda;
+    package = pkgs-cuda.ollama-cuda;
   };
 
   # Syncthing

@@ -20,6 +20,8 @@
     };
 
     antigravity-nix.url = "github:jacopone/antigravity-nix";
+
+    nixpkgs-cuda.url = "github:nixos/nixpkgs/4975466d324710c576dc11ad614684e6bd8cad8e";
   };
 
   outputs =
@@ -32,6 +34,11 @@
     let
       user = "dirge";
 
+      pkgs-cuda = import inputs.nixpkgs-cuda {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+
       overlay = import ./overlays { inherit inputs; };
     in
     {
@@ -43,7 +50,7 @@
       nixosConfigurations = {
         sff-icient = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs user; };
+          specialArgs = { inherit inputs user pkgs-cuda; };
           modules = [
             ./hosts/sff-icient/default.nix
             home-manager.nixosModules.home-manager
