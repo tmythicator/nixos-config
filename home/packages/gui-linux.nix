@@ -16,6 +16,7 @@
     gthumb
     audacity
     kooha
+    asunder
 
     # File Manager
     file-roller

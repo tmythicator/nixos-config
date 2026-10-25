@@ -21,6 +21,12 @@
   programs.hyprland.enable = true;
   security.pam.services.hyprlock = { };
 
+  programs.k3b.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    dvdplusrwtools
+  ];
+
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
   };

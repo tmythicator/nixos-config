@@ -86,6 +86,7 @@ in
       "audio"
       "video"
       "docker"
+      "cdrom"
     ];
     shell = pkgs.zsh;
   };
