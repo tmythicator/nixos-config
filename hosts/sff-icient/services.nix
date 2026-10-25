@@ -1,4 +1,9 @@
-{ pkgs, pkgs-cuda, user, ... }:
+{
+  pkgs,
+  pkgs-cuda,
+  user,
+  ...
+}:
 let
   home = "/home/${user}";
 in

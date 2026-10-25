@@ -14,12 +14,8 @@ let
     waybarSwayncTheme.mkWaybarThemeCss tokens.light
   );
 
-  darkGtkCssDerivation = pkgs.writeText "gtk-theme-dark.css" (
-    gtkTheme.mkFullGtkCss tokens.dark
-  );
-  lightGtkCssDerivation = pkgs.writeText "gtk-theme-light.css" (
-    gtkTheme.mkFullGtkCss tokens.light
-  );
+  darkGtkCssDerivation = pkgs.writeText "gtk-theme-dark.css" (gtkTheme.mkFullGtkCss tokens.dark);
+  lightGtkCssDerivation = pkgs.writeText "gtk-theme-light.css" (gtkTheme.mkFullGtkCss tokens.light);
 
   darkAlacrittyDerivation = pkgs.writeText "alacritty-theme-dark.toml" (
     alacrittyTheme.mkAlacrittyToml tokens.dark
@@ -28,9 +24,7 @@ let
     alacrittyTheme.mkAlacrittyToml tokens.light
   );
 
-  darkFuzzelDerivation = pkgs.writeText "fuzzel-theme-dark.ini" (
-    fuzzelTheme.mkFuzzelIni tokens.dark
-  );
+  darkFuzzelDerivation = pkgs.writeText "fuzzel-theme-dark.ini" (fuzzelTheme.mkFuzzelIni tokens.dark);
   lightFuzzelDerivation = pkgs.writeText "fuzzel-theme-light.ini" (
     fuzzelTheme.mkFuzzelIni tokens.light
   );
