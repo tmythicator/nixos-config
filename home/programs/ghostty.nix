@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   tokens = import ../palette.nix;
 
@@ -28,7 +28,7 @@ let
   '';
 in
 {
-  home.packages = [ pkgs.ghostty ];
+  home.packages = lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.ghostty ];
 
   xdg.configFile."ghostty/themes/solarized-dark".text = mkTheme tokens.dark;
   xdg.configFile."ghostty/themes/solarized-light".text = mkTheme tokens.light;
