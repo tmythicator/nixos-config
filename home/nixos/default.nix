@@ -52,7 +52,6 @@ in
   systemd.user.services.emacs.Service = {
     Restart = "on-failure";
     RestartSec = 3;
-    Environment = "DISPLAY=:0";
   };
 
   programs.zsh = {

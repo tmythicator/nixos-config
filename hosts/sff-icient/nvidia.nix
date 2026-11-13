@@ -29,7 +29,7 @@
   # Fix NVIDIA freeze/deadlock on resume
   systemd.sleep.settings.Sleep = {
     AllowSuspend = "yes";
-    AllowHibernation = "yes";
+    AllowHibernation = "no";
     FreezeUserSessions = "no";
   };
 }
