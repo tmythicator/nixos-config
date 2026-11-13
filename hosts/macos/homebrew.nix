@@ -27,6 +27,7 @@
       "darktable"
       "gimp"
       "google-chrome"
+      "ghostty"
       "intellij-idea"
       "keepassxc"
       "libreoffice"

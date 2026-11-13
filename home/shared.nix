@@ -5,6 +5,7 @@
 
   imports = [
     ./programs/alacritty.nix
+    ./programs/ghostty.nix
     ./programs/starship.nix
     ./programs/zsh.nix
     ./programs/git.nix
