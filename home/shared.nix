@@ -4,7 +4,6 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ./programs/alacritty.nix
     ./programs/ghostty.nix
     ./programs/starship.nix
     ./programs/zsh.nix

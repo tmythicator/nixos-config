@@ -17,7 +17,7 @@ let
     COUNT=$(${pkgs.hyprland}/bin/hyprctl activeworkspace -j | ${pkgs.jq}/bin/jq -r '.windows // 0')
     if [ "$COUNT" -le 1 ]; then
       ${pkgs.hyprland}/bin/hyprctl dispatch layoutmsg "preselect d"
-      ${pkgs.alacritty}/bin/alacritty &
+      ${pkgs.ghostty}/bin/ghostty &
     else
       ${pkgs.hyprland}/bin/hyprctl dispatch layoutmsg togglesplit
     fi
@@ -28,7 +28,7 @@ let
     COUNT=$(${pkgs.hyprland}/bin/hyprctl activeworkspace -j | ${pkgs.jq}/bin/jq -r '.windows // 0')
     if [ "$COUNT" -le 1 ]; then
       ${pkgs.hyprland}/bin/hyprctl dispatch layoutmsg "preselect r"
-      ${pkgs.alacritty}/bin/alacritty &
+      ${pkgs.ghostty}/bin/ghostty &
     else
       ${pkgs.hyprland}/bin/hyprctl dispatch layoutmsg togglesplit
     fi
@@ -255,7 +255,7 @@ in
         # Core Controls
         "$mod, P, exec, ${pkgs.fuzzel}/bin/fuzzel"
         "$mod, V, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel -d --prompt 'clip: ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
-        "$mod, A, exec, ${pkgs.alacritty}/bin/alacritty"
+        "$mod, A, exec, ${pkgs.ghostty}/bin/ghostty"
         "$mod, E, exec, emacsclient -c -n"
         "$mod, 0, movetoworkspacesilent, special:minimized"
         "$mod, K, killactive"

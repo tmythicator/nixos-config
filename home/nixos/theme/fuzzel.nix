@@ -7,7 +7,7 @@ in
     [main]
     font=JetBrainsMono Nerd Font:size=11
     prompt="❯ "
-    terminal=${pkgs.alacritty}/bin/alacritty
+    terminal=${pkgs.ghostty}/bin/ghostty
     lines=10
     width=40
     horizontal-pad=20

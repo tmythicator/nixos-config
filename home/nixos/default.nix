@@ -31,11 +31,8 @@ in
   };
 
   home.packages = with pkgs; [
-    cmake
     gnumake
     gcc
-    libtool
-    libvterm
   ];
 
   # Emacs Daemon (Linux Systemd)

@@ -4,7 +4,6 @@ let
 
   gtkTheme = import ./gtk.nix;
   waybarSwayncTheme = import ./waybar-swaync.nix;
-  alacrittyTheme = import ./alacritty.nix;
   fuzzelTheme = import ./fuzzel.nix { inherit pkgs lib; };
 
   darkWaybarCssDerivation = pkgs.writeText "waybar-theme-dark.css" (
@@ -16,13 +15,6 @@ let
 
   darkGtkCssDerivation = pkgs.writeText "gtk-theme-dark.css" (gtkTheme.mkFullGtkCss tokens.dark);
   lightGtkCssDerivation = pkgs.writeText "gtk-theme-light.css" (gtkTheme.mkFullGtkCss tokens.light);
-
-  darkAlacrittyDerivation = pkgs.writeText "alacritty-theme-dark.toml" (
-    alacrittyTheme.mkAlacrittyToml tokens.dark
-  );
-  lightAlacrittyDerivation = pkgs.writeText "alacritty-theme-light.toml" (
-    alacrittyTheme.mkAlacrittyToml tokens.light
-  );
 
   darkFuzzelDerivation = pkgs.writeText "fuzzel-theme-dark.ini" (fuzzelTheme.mkFuzzelIni tokens.dark);
   lightFuzzelDerivation = pkgs.writeText "fuzzel-theme-light.ini" (
@@ -42,7 +34,7 @@ let
     STATE_DIR="$HOME/.config/timcha-theme"
     STATE_FILE="$STATE_DIR/mode"
 
-    mkdir -p "$STATE_DIR" "$HOME/.config/waybar" "$HOME/.config/swaync" "$HOME/.config/alacritty" "$HOME/.config/fuzzel" "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0"
+    mkdir -p "$STATE_DIR" "$HOME/.config/waybar" "$HOME/.config/swaync" "$HOME/.config/fuzzel" "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0"
 
     CURRENT=$(cat "$STATE_FILE" 2>/dev/null || echo "dark")
     [ "$MODE" = "toggle" ] || [ -z "$MODE" ] && { [ "$CURRENT" = "dark" ] && MODE="light" || MODE="dark"; }
@@ -52,7 +44,6 @@ let
       light)
         CSS="${lightWaybarCssDerivation}"
         GTK_CSS="${lightGtkCssDerivation}"
-        TOML="${lightAlacrittyDerivation}"
         FUZZEL="${lightFuzzelDerivation}"
         GTK="${tokens.light.gtkColorScheme}"
         GTK_THEME="adw-gtk3"
@@ -65,7 +56,6 @@ let
       *)
         CSS="${darkWaybarCssDerivation}"
         GTK_CSS="${darkGtkCssDerivation}"
-        TOML="${darkAlacrittyDerivation}"
         FUZZEL="${darkFuzzelDerivation}"
         GTK="${tokens.dark.gtkColorScheme}"
         GTK_THEME="adw-gtk3-dark"
@@ -81,7 +71,6 @@ let
     ln -sf "$CSS" "$HOME/.config/swaync/theme.css"
     ln -sf "$GTK_CSS" "$HOME/.config/gtk-3.0/gtk.css"
     ln -sf "$GTK_CSS" "$HOME/.config/gtk-4.0/gtk.css"
-    ln -sf "$TOML" "$HOME/.config/alacritty/theme.toml"
     ln -sf "$FUZZEL" "$HOME/.config/fuzzel/fuzzel.ini"
 
     ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface color-scheme "$GTK" 2>/dev/null || true
@@ -105,7 +94,7 @@ in
 
   # Initialization via Home-Manager activation
   home.activation.initTheme = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    mkdir -p "$HOME/.config/waybar" "$HOME/.config/swaync" "$HOME/.config/alacritty" "$HOME/.config/fuzzel" "$HOME/.config/timcha-theme" "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0"
+    mkdir -p "$HOME/.config/waybar" "$HOME/.config/swaync" "$HOME/.config/fuzzel" "$HOME/.config/timcha-theme" "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0"
     if [ ! -f "$HOME/.config/waybar/theme.css" ]; then
       ln -sf "${darkWaybarCssDerivation}" "$HOME/.config/waybar/theme.css"
     fi
@@ -117,9 +106,6 @@ in
     fi
     if [ ! -f "$HOME/.config/gtk-4.0/gtk.css" ]; then
       ln -sf "${darkGtkCssDerivation}" "$HOME/.config/gtk-4.0/gtk.css"
-    fi
-    if [ ! -f "$HOME/.config/alacritty/theme.toml" ]; then
-      ln -sf "${darkAlacrittyDerivation}" "$HOME/.config/alacritty/theme.toml"
     fi
     if [ ! -f "$HOME/.config/fuzzel/fuzzel.ini" ]; then
       ln -sf "${darkFuzzelDerivation}" "$HOME/.config/fuzzel/fuzzel.ini"
