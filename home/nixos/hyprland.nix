@@ -190,8 +190,11 @@ in
     style.name = "adwaita-dark";
   };
 
+  xdg.portal.enable = lib.mkForce false;
+
   wayland.windowManager.hyprland = {
     enable = true;
+    package = null;
     configType = "hyprlang";
     settings = (hyprlandTheme.mkHyprlandDecoration tokens.dark) // {
       monitor = ",preferred,auto,1";

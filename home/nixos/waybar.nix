@@ -43,7 +43,6 @@
           format-en = "EN";
           format-ru = "RU";
           format-de = "DE";
-          keyboard-name = "by-tech-gaming-keyboard";
           on-click = "${pkgs.hyprland}/bin/hyprctl switchxkblayout all next";
         };
 

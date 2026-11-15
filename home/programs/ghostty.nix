@@ -46,5 +46,8 @@ in
     app-notifications = no-config-reload
 
     theme = light:solarized-light,dark:solarized-dark
+
+    keybind = alt+w=copy_to_clipboard
+    keybind = ctrl+y=paste_from_clipboard
   '';
 }
