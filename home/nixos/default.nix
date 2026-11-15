@@ -9,6 +9,7 @@
     ../shared.nix
     ../secrets.nix
     # ./gnome.nix
+    ./appearance.nix
     ./hyprland.nix
     ./waybar.nix
     ./swaync.nix
