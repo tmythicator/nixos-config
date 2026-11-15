@@ -4,10 +4,6 @@
   config,
   ...
 }:
-let
-  homeDir = config.home.homeDirectory;
-  flakeDir = "${homeDir}/Development/nixos-config";
-in
 {
   imports = [
     ./../shared.nix
@@ -25,8 +21,7 @@ in
     '';
 
     shellAliases = {
-      update = "sudo nix run nix-darwin -- switch --flake ${flakeDir}#macos";
-      upgrade = "nix flake update --flake ${flakeDir} && update";
+      update = "darwin-rebuild switch --flake ${config.home.homeDirectory}/Development/nixos-config#macos";
     };
 
     initContent = ''

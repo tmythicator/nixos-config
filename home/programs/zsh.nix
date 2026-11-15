@@ -32,6 +32,7 @@
         else
           "systemctl --user restart emacs";
       gc = "nix-collect-garbage -d";
+      upgrade = "nix flake update --flake ${config.home.homeDirectory}/Development/nixos-config && update";
     };
 
     initContent =

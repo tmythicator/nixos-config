@@ -4,10 +4,6 @@
   user,
   ...
 }:
-let
-  homeDir = config.home.homeDirectory;
-  flakeDir = "${homeDir}/Development/nixos-config";
-in
 {
   imports = [
     ../shared.nix
@@ -53,8 +49,7 @@ in
 
   programs.zsh = {
     shellAliases = {
-      update = "sudo nixos-rebuild switch --flake ${flakeDir}#sff-icient";
-      upgrade = "nix flake update --flake ${flakeDir} && update";
+      update = "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/Development/nixos-config#sff-icient";
     };
   };
 
