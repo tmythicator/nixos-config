@@ -42,10 +42,6 @@
     ];
   };
 
-  swapDevices = [
-    { device = "/dev/mapper/luks-bd45f143-16fe-4860-ada1-c4ec34c7ac11"; }
-  ];
-
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

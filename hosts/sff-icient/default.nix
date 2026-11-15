@@ -161,11 +161,19 @@ in
     python3
   ];
 
-  # Random encrypted swap
-  swapDevices = lib.mkForce [
+  # In-memory compressed swap (reduces NVMe wear, faster responsiveness)
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+  };
+
+  # Fallback random encrypted swap partition
+  swapDevices = [
     {
       device = "/dev/disk/by-partuuid/b6a36ff0-d239-4e4f-91ad-b80be70ebae6";
       randomEncryption.enable = true;
+      priority = 10;
     }
   ];
 
