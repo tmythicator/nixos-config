@@ -21,7 +21,7 @@
     '';
 
     shellAliases = {
-      update = "darwin-rebuild switch --flake ${config.home.homeDirectory}/Development/nixos-config#macos";
+      update = "sudo darwin-rebuild switch --flake ${config.home.homeDirectory}/Development/nixos-config#macos";
     };
 
     initContent = ''
