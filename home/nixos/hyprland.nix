@@ -181,7 +181,6 @@ in
         aceSwap = "${aceSwap}/bin/ace-swap";
         splitBelow = "${splitBelow}/bin/hypr-split-below";
         splitRight = "${splitRight}/bin/hypr-split-right";
-        switchBuffer = "${switchBuffer}/bin/switch-buffer";
       }
     );
   };

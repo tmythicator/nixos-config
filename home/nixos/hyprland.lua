@@ -21,7 +21,6 @@ local paths = {
   aceSwap         = "@aceSwap@",
   splitBelow      = "@splitBelow@",
   splitRight      = "@splitRight@",
-  switchBuffer    = "@switchBuffer@",
   barBg           = "@barBg@",
 }
 
@@ -82,18 +81,14 @@ hl.config({
       natural_scroll = true,
     },
   },
-  animations = {
-    enabled = true,
-  },
   dwindle = {
     preserve_split = true,
   },
   cursor = {
-    no_hardware_cursors = true,
+    no_hardware_cursors = 2,
   },
   misc = {
     disable_hyprland_logo = true,
-    disable_splash_rendering = true,
   },
 })
 
@@ -144,36 +139,24 @@ local standard_binds = {
   { "Print", hl.dsp.exec_cmd(paths.screenshotReg) },
   { "SHIFT + Print", hl.dsp.exec_cmd(paths.screenshotFull) },
 
-  -- Focus (Arrows + Vim/Emacs)
+  -- Focus (Arrows)
   { mod .. " + left", hl.dsp.focus({ direction = "left" }) },
   { mod .. " + right", hl.dsp.focus({ direction = "right" }) },
   { mod .. " + up", hl.dsp.focus({ direction = "up" }) },
   { mod .. " + down", hl.dsp.focus({ direction = "down" }) },
-  { mod .. " + B", hl.dsp.focus({ direction = "left" }) },
-  { mod .. " + F", hl.dsp.focus({ direction = "right" }) },
-  { mod .. " + U", hl.dsp.focus({ direction = "up" }) },
-  { mod .. " + N", hl.dsp.focus({ direction = "down" }) },
   { mod .. " + O", hl.dsp.window.cycle_next() },
 
-  -- Window Movement within Workspace
+  -- Window Movement within Workspace (Arrows)
   { mod .. " + SHIFT + left", hl.dsp.window.move({ direction = "left" }) },
   { mod .. " + SHIFT + right", hl.dsp.window.move({ direction = "right" }) },
   { mod .. " + SHIFT + up", hl.dsp.window.move({ direction = "up" }) },
   { mod .. " + SHIFT + down", hl.dsp.window.move({ direction = "down" }) },
-  { mod .. " + SHIFT + B", hl.dsp.window.move({ direction = "left" }) },
-  { mod .. " + SHIFT + F", hl.dsp.window.move({ direction = "right" }) },
-  { mod .. " + SHIFT + U", hl.dsp.window.move({ direction = "up" }) },
-  { mod .. " + SHIFT + N", hl.dsp.window.move({ direction = "down" }) },
 
-  -- Window Swapping with Adjacent
+  -- Window Swapping with Adjacent (Arrows)
   { mod .. " + CTRL + left", hl.dsp.window.swap({ direction = "left" }) },
   { mod .. " + CTRL + right", hl.dsp.window.swap({ direction = "right" }) },
   { mod .. " + CTRL + up", hl.dsp.window.swap({ direction = "up" }) },
   { mod .. " + CTRL + down", hl.dsp.window.swap({ direction = "down" }) },
-  { mod .. " + CTRL + B", hl.dsp.window.swap({ direction = "left" }) },
-  { mod .. " + CTRL + F", hl.dsp.window.swap({ direction = "right" }) },
-  { mod .. " + CTRL + U", hl.dsp.window.swap({ direction = "up" }) },
-  { mod .. " + CTRL + N", hl.dsp.window.swap({ direction = "down" }) },
 
   -- Window Tabs / Groups
   { mod .. " + G", hl.dsp.group.toggle() },
@@ -194,9 +177,7 @@ local function cycle_top(prev)
   end
 end
 
-hl.bind("ALT + TAB", cycle_top(false))
 hl.bind(mod .. " + TAB", cycle_top(false))
-hl.bind("ALT + SHIFT + TAB", cycle_top(true))
 hl.bind(mod .. " + SHIFT + TAB", cycle_top(true))
 
 -- Workspaces 1..9
@@ -219,19 +200,14 @@ local media_binds = {
   { "XF86AudioMute",        hl.dsp.exec_cmd(paths.wireplumber .. " set-mute " .. default_sink .. " toggle"), { locked = true } },
   { "XF86AudioMicMute",     hl.dsp.exec_cmd("toggle-mic"), { locked = true } },
   { "XF86AudioPlay",        hl.dsp.exec_cmd(paths.playerctl .. " play-pause"), { locked = true } },
-  { "XF86AudioPause",       hl.dsp.exec_cmd(paths.playerctl .. " play-pause"), { locked = true } },
   { "XF86AudioNext",        hl.dsp.exec_cmd(paths.playerctl .. " next"), { locked = true } },
   { "XF86AudioPrev",        hl.dsp.exec_cmd(paths.playerctl .. " previous"), { locked = true } },
 
-  -- Repeating Window Resizing
+  -- Repeating Window Resizing (Arrows)
   { mod .. " + ALT + right",hl.dsp.window.resize({ x = 40, y = 0, relative = true }), { repeating = true } },
   { mod .. " + ALT + left", hl.dsp.window.resize({ x = -40, y = 0, relative = true }), { repeating = true } },
   { mod .. " + ALT + down", hl.dsp.window.resize({ x = 0, y = 40, relative = true }), { repeating = true } },
   { mod .. " + ALT + up",   hl.dsp.window.resize({ x = 0, y = -40, relative = true }), { repeating = true } },
-  { mod .. " + ALT + F",    hl.dsp.window.resize({ x = 40, y = 0, relative = true }), { repeating = true } },
-  { mod .. " + ALT + B",    hl.dsp.window.resize({ x = -40, y = 0, relative = true }), { repeating = true } },
-  { mod .. " + ALT + N",    hl.dsp.window.resize({ x = 0, y = 40, relative = true }), { repeating = true } },
-  { mod .. " + ALT + U",    hl.dsp.window.resize({ x = 0, y = -40, relative = true }), { repeating = true } },
 
   -- Mouse Window Drag / Resize
   { mod .. " + mouse:272",  hl.dsp.window.drag(), { mouse = true } },
@@ -254,20 +230,10 @@ hl.define_submap("emacs_x", function()
   end
 
   local chords = {
-    { "O",           hl.dsp.window.cycle_next() },
     { "0",           hl.dsp.exec_raw("movetoworkspacesilent special:minimized") },
     { "1",           hl.dsp.window.fullscreen(1) },
     { "2",           hl.dsp.exec_cmd(paths.splitBelow) },
     { "3",           hl.dsp.exec_cmd(paths.splitRight) },
-    { "K",           hl.dsp.window.kill() },
-    { "B",           hl.dsp.exec_cmd(paths.switchBuffer) },
-    { "W",           hl.dsp.exec_cmd(paths.pkill .. " -SIGUSR1 waybar") },
-    { "N",           hl.dsp.exec_cmd(paths.swayncClient .. " -t -sw") },
-    { "T",           hl.dsp.group.toggle() },
-    { "C",           hl.dsp.exec_cmd("toggle-theme") },
-    { "S",           hl.dsp.exec_cmd(paths.aceSwap) },
-    { "bracketleft", hl.dsp.group.prev() },
-    { "bracketright",hl.dsp.group.next() },
     { "G",           hl.dsp.submap("reset") },
     { "escape",      hl.dsp.submap("reset") },
     { "SUPER + X",   hl.dsp.submap("reset") },
