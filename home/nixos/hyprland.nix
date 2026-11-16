@@ -156,252 +156,33 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
-    configType = "hyprlang";
-    settings = (hyprlandTheme.mkHyprlandDecoration tokens.dark) // {
-      monitor = ",preferred,auto,1";
-
-      env = [
-        "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
-        "XCURSOR_THEME,Bibata-Modern-Classic"
-        "HYPRCURSOR_THEME,Bibata-Modern-Classic"
-      ];
-
-      # Autostart essential services with palette background
-      exec-once = [
-        "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "${pkgs.swaybg}/bin/swaybg -c '${tokens.dark.barBg}'"
-        "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
-        "${pkgs.blueman}/bin/blueman-applet"
-        "${pkgs.hyprpolkitagent}/bin/hyprpolkitagent"
-      ];
-
-      # Keyboard & Mouse
-      input = {
-        kb_layout = "us,de,ru";
-        kb_options = "ctrl:nocaps,grp:win_space_toggle";
-        follow_mouse = 0;
-        touchpad = {
-          natural_scroll = true;
-        };
-      };
-
-      animations = {
-        enabled = true;
-        bezier = "snappy, 0.15, 0.9, 0.2, 1.0";
-        animation = [
-          "windows, 1, 2, snappy, popin 90%"
-          "windowsOut, 1, 2, snappy, popin 90%"
-          "border, 1, 3, default"
-          "fade, 1, 2, default"
-          "workspaces, 1, 2, snappy"
-        ];
-      };
-
-      dwindle = {
-        preserve_split = true;
-      };
-
-      cursor = {
-        no_hardware_cursors = true;
-      };
-
-      misc = {
-        disable_hyprland_logo = true;
-        disable_splash_rendering = true;
-        background_color = tokens.dark.hyprBackground;
-      };
-
-      "$mod" = "SUPER";
-
-      bind = [
-        # Core Controls
-        "$mod, P, exec, ${pkgs.fuzzel}/bin/fuzzel"
-        "$mod, V, exec, ${pkgs.cliphist}/bin/cliphist list | ${pkgs.fuzzel}/bin/fuzzel -d --prompt 'clip: ' | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
-        "$mod, A, exec, ${pkgs.ghostty}/bin/ghostty"
-        "$mod, E, exec, emacsclient -c -n"
-        "$mod, 0, movetoworkspacesilent, special:minimized"
-        "$mod, K, killactive"
-        "$mod SHIFT, E, exit"
-
-        # Lock Screen & Suspend
-        "$mod, L, exec, ${pkgs.hyprlock}/bin/hyprlock"
-        "$mod SHIFT, L, exec, ${pkgs.systemd}/bin/systemctl suspend"
-
-        # Toggle Waybar Visibility
-        "$mod, BACKSLASH, exec, ${pkgs.procps}/bin/pkill -SIGUSR1 waybar"
-
-        # Toggle Notification & Control Center (SwayNC)
-        "$mod, C, exec, ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw"
-
-        # Toggle Dark / Light Theme
-        "$mod SHIFT, T, exec, toggle-theme"
-
-        # Screenshots
-        "$mod, S, exec, ${screenshotRegion}/bin/screenshot-region"
-        "$mod SHIFT, S, exec, ${screenshotFull}/bin/screenshot-full"
-        ", Print, exec, ${screenshotRegion}/bin/screenshot-region"
-        "SHIFT, Print, exec, ${screenshotFull}/bin/screenshot-full"
-
-        # Ace-Window Swap
-        "$mod SHIFT, O, exec, ${aceSwap}/bin/ace-swap"
-
-        # Movement / Focus
-        "$mod, left, movefocus, l"
-        "$mod, right, movefocus, r"
-        "$mod, up, movefocus, u"
-        "$mod, down, movefocus, d"
-        "$mod, B, movefocus, l"
-        "$mod, F, movefocus, r"
-        "$mod, U, movefocus, u"
-        "$mod, N, movefocus, d"
-        "$mod, O, cyclenext"
-
-        # Window Cycling
-        "ALT, TAB, cyclenext"
-        "ALT, TAB, bringactivetotop"
-        "ALT SHIFT, TAB, cyclenext, prev"
-        "ALT SHIFT, TAB, bringactivetotop"
-        "$mod, TAB, cyclenext"
-        "$mod, TAB, bringactivetotop"
-        "$mod SHIFT, TAB, cyclenext, prev"
-        "$mod SHIFT, TAB, bringactivetotop"
-
-        # Move active window within workspace
-        "$mod SHIFT, left, movewindow, l"
-        "$mod SHIFT, right, movewindow, r"
-        "$mod SHIFT, up, movewindow, u"
-        "$mod SHIFT, down, movewindow, d"
-        "$mod SHIFT, B, movewindow, l"
-        "$mod SHIFT, F, movewindow, r"
-        "$mod SHIFT, U, movewindow, u"
-        "$mod SHIFT, N, movewindow, d"
-
-        # Swap active window with adjacent window
-        "$mod CTRL, left, swapwindow, l"
-        "$mod CTRL, right, swapwindow, r"
-        "$mod CTRL, up, swapwindow, u"
-        "$mod CTRL, down, swapwindow, d"
-        "$mod CTRL, B, swapwindow, l"
-        "$mod CTRL, F, swapwindow, r"
-        "$mod CTRL, U, swapwindow, u"
-        "$mod CTRL, N, swapwindow, d"
-
-        # Window Tabs
-        "$mod, G, togglegroup"
-        "$mod, bracketleft, changegroupactive, b"
-        "$mod, bracketright, changegroupactive, f"
-
-        # Fullscreen
-        "$mod, RETURN, fullscreen, 1"
-
-        # Workspaces 1..9
-        "$mod, 1, workspace, 1"
-        "$mod, 2, workspace, 2"
-        "$mod, 3, workspace, 3"
-        "$mod, 4, workspace, 4"
-        "$mod, 5, workspace, 5"
-        "$mod, 6, workspace, 6"
-        "$mod, 7, workspace, 7"
-        "$mod, 8, workspace, 8"
-        "$mod, 9, workspace, 9"
-
-        # Move window to workspace 1..9
-        "$mod SHIFT, 1, movetoworkspace, 1"
-        "$mod SHIFT, 2, movetoworkspace, 2"
-        "$mod SHIFT, 3, movetoworkspace, 3"
-        "$mod SHIFT, 4, movetoworkspace, 4"
-        "$mod SHIFT, 5, movetoworkspace, 5"
-        "$mod SHIFT, 6, movetoworkspace, 6"
-        "$mod SHIFT, 7, movetoworkspace, 7"
-        "$mod SHIFT, 8, movetoworkspace, 8"
-        "$mod SHIFT, 9, movetoworkspace, 9"
-
-        # Silently send window to workspace 1..9
-        "$mod CTRL, 1, movetoworkspacesilent, 1"
-        "$mod CTRL, 2, movetoworkspacesilent, 2"
-        "$mod CTRL, 3, movetoworkspacesilent, 3"
-        "$mod CTRL, 4, movetoworkspacesilent, 4"
-        "$mod CTRL, 5, movetoworkspacesilent, 5"
-        "$mod CTRL, 6, movetoworkspacesilent, 6"
-        "$mod CTRL, 7, movetoworkspacesilent, 7"
-        "$mod CTRL, 8, movetoworkspacesilent, 8"
-        "$mod CTRL, 9, movetoworkspacesilent, 9"
-
-        # Emacs Chording Mode
-        "$mod, X, submap, emacs_x"
-      ];
-
-      # Repeatable hardware keys
-      bindel = [
-        ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set +5%"
-        ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%-"
-      ];
-
-      # Non-repeatable hardware keys
-      bindl = [
-        ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", XF86AudioMicMute, exec, toggle-mic"
-        ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
-        ", XF86AudioPause, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
-        ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
-        ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
-      ];
-
-      # Repeatable window resizing
-      binde = [
-        "$mod ALT, right, resizeactive, 40 0"
-        "$mod ALT, left, resizeactive, -40 0"
-        "$mod ALT, down, resizeactive, 0 40"
-        "$mod ALT, up, resizeactive, 0 -40"
-        "$mod ALT, F, resizeactive, 40 0"
-        "$mod ALT, B, resizeactive, -40 0"
-        "$mod ALT, N, resizeactive, 0 40"
-        "$mod ALT, U, resizeactive, 0 -40"
-      ];
-
-      # Mouse bindings
-      bindm = [
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
-      ];
-    };
-
-    extraConfig = ''
-      submap = emacs_x
-      bind = , O, cyclenext
-      bind = , O, submap, reset
-      bind = , 0, movetoworkspacesilent, special:minimized
-      bind = , 0, submap, reset
-      bind = , 1, fullscreen, 1
-      bind = , 1, submap, reset
-      bind = , 2, exec, ${splitBelow}/bin/hypr-split-below
-      bind = , 2, submap, reset
-      bind = , 3, exec, ${splitRight}/bin/hypr-split-right
-      bind = , 3, submap, reset
-      bind = , K, killactive
-      bind = , K, submap, reset
-      bind = , B, exec, ${switchBuffer}/bin/switch-buffer
-      bind = , B, submap, reset
-      bind = , W, exec, ${pkgs.procps}/bin/pkill -SIGUSR1 waybar
-      bind = , W, submap, reset
-      bind = , N, exec, ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw
-      bind = , N, submap, reset
-      bind = , T, togglegroup
-      bind = , T, submap, reset
-      bind = , C, exec, toggle-theme
-      bind = , C, submap, reset
-      bind = , S, exec, ${aceSwap}/bin/ace-swap
-      bind = , S, submap, reset
-      bind = , bracketleft, changegroupactive, b
-      bind = , bracketright, changegroupactive, f
-      bind = , G, submap, reset
-      bind = , escape, submap, reset
-      bind = $mod, X, submap, reset
-      submap = reset
-    '';
+    configType = "lua";
+    extraConfig = builtins.readFile (
+      pkgs.replaceVars ./hyprland.lua {
+        barBg = tokens.dark.barBg;
+        dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment";
+        systemctl = "${pkgs.systemd}/bin/systemctl";
+        swaybg = "${pkgs.swaybg}/bin/swaybg";
+        nmApplet = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+        blueman = "${pkgs.blueman}/bin/blueman-applet";
+        polkit = "${pkgs.hyprpolkitagent}/bin/hyprpolkitagent";
+        fuzzel = "${pkgs.fuzzel}/bin/fuzzel";
+        cliphist = "${pkgs.cliphist}/bin/cliphist";
+        wlCopy = "${pkgs.wl-clipboard}/bin/wl-copy";
+        ghostty = "${pkgs.ghostty}/bin/ghostty";
+        hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
+        pkill = "${pkgs.procps}/bin/pkill";
+        swayncClient = "${pkgs.swaynotificationcenter}/bin/swaync-client";
+        wireplumber = "${pkgs.wireplumber}/bin/wpctl";
+        brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
+        playerctl = "${pkgs.playerctl}/bin/playerctl";
+        screenshotReg = "${screenshotRegion}/bin/screenshot-region";
+        screenshotFull = "${screenshotFull}/bin/screenshot-full";
+        aceSwap = "${aceSwap}/bin/ace-swap";
+        splitBelow = "${splitBelow}/bin/hypr-split-below";
+        splitRight = "${splitRight}/bin/hypr-split-right";
+        switchBuffer = "${switchBuffer}/bin/switch-buffer";
+      }
+    );
   };
 }

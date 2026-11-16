@@ -104,50 +104,51 @@ in
     ];
   };
 
-  mkHyprlandDecoration = t: {
-    general = {
-      gaps_in = 4;
-      gaps_out = 8;
-      border_size = 2;
-      "col.active_border" = t.hyprActiveBorder;
-      "col.inactive_border" = t.hyprInactiveBorder;
-      layout = "dwindle";
-    };
-
-    decoration = {
-      rounding = 4;
-      blur = {
-        enabled = true;
-        size = 6;
-        passes = 2;
-        new_optimizations = true;
-        ignore_opacity = true;
-      };
-      shadow = {
-        enabled = true;
-        range = 8;
-        render_power = 2;
-        color = t.hyprShadow;
-      };
-    };
-
-    group = {
-      "col.border_active" = t.hyprGroupBorderActive;
-      "col.border_inactive" = t.hyprGroupBorderInactive;
-      groupbar = {
-        font_family = "JetBrainsMono Nerd Font";
-        font_size = 10;
-        gradients = false;
-        text_color = t.hyprGroupText;
-        "col.active" = t.hyprGroupActive;
-        "col.inactive" = t.hyprGroupInactive;
-      };
-    };
-
-    misc = {
-      disable_hyprland_logo = true;
-      disable_splash_rendering = true;
-      background_color = t.hyprBackground;
-    };
-  };
+  mkHyprlandThemeLua = t:
+    let
+      parseBorder = s:
+        let
+          parts = lib.splitString " " s;
+        in
+        if lib.length parts >= 2 then
+          let
+            colors = lib.init parts;
+            angleStr = lib.last parts;
+            angle = if lib.hasSuffix "deg" angleStr then lib.removeSuffix "deg" angleStr else "45";
+          in
+          "{ colors = { " + lib.concatMapStringsSep ", " (c: "\"${c}\"") colors + " }, angle = ${angle} }"
+        else
+          "\"${s}\"";
+    in
+    ''
+      hl.config({
+        general = {
+          col = {
+            active_border = ${parseBorder t.hyprActiveBorder},
+            inactive_border = "${t.hyprInactiveBorder}",
+          },
+        },
+        decoration = {
+          shadow = {
+            color = "${t.hyprShadow}",
+          },
+        },
+        group = {
+          col = {
+            border_active = "${t.hyprGroupBorderActive}",
+            border_inactive = "${t.hyprGroupBorderInactive}",
+          },
+          groupbar = {
+            text_color = "${t.hyprGroupText}",
+            col = {
+              active = "${t.hyprGroupActive}",
+              inactive = "${t.hyprGroupInactive}",
+            },
+          },
+        },
+        misc = {
+          background_color = "${t.hyprBackground}",
+        },
+      })
+    '';
 }
