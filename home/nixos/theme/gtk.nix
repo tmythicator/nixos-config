@@ -29,6 +29,10 @@
     @define-color headerbar_fg_color ${t.textMain};
     @define-color card_bg_color ${t.cardBg};
     @define-color card_fg_color ${t.textMain};
+    @define-color sidebar_bg_color ${t.barBg};
+    @define-color sidebar_fg_color ${t.textMain};
+    @define-color secondary_sidebar_bg_color ${t.cardBg};
+    @define-color secondary_sidebar_fg_color ${t.textMain};
     @define-color popover_bg_color ${t.cardBg};
     @define-color popover_fg_color ${t.textMain};
     @define-color dialog_bg_color ${t.barBg};
