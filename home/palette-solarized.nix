@@ -114,10 +114,10 @@
     hyprInactiveBorder = "rgba(073642ff)";
     hyprGroupBorderActive = "rgba(2aa198ff)";
     hyprGroupBorderInactive = "rgba(073642ff)";
-    hyprGroupActive = "0ffeee8d5";
+    hyprGroupActive = "0xffeee8d5";
     hyprGroupInactive = "0xfffdf6e3";
     hyprGroupText = "0xff073642";
-    hyprBackground = "0xfdf6e3";
+    hyprBackground = "0x00fdf6e3";
     hyprShadow = "rgba(07364255)";
   };
 }
