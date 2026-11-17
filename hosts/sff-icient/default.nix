@@ -142,13 +142,6 @@ in
     expat
   ];
 
-  # GC weekly
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
-
   environment.systemPackages = with pkgs; [
     nano
     wget

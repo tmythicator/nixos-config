@@ -49,5 +49,9 @@ in
 
     keybind = alt+w=copy_to_clipboard
     keybind = ctrl+y=paste_from_clipboard
+  '' + lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
+    macos-titlebar-style = hidden
+    keybind = super+c=copy_to_clipboard
+    keybind = super+v=paste_from_clipboard
   '';
 }

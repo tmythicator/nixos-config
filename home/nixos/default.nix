@@ -10,7 +10,7 @@
     ../secrets.nix
     # ./gnome.nix
     ./appearance.nix
-    ./hyprland.nix
+    ./hyprland
     ./waybar.nix
     ./swaync.nix
     ./theme

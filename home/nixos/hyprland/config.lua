@@ -16,11 +16,10 @@ local paths = {
   wireplumber     = "@wireplumber@",
   brightnessctl   = "@brightnessctl@",
   playerctl       = "@playerctl@",
-  screenshotReg   = "@screenshotReg@",
-  screenshotFull  = "@screenshotFull@",
+  screenshot      = "@screenshot@",
   aceSwap         = "@aceSwap@",
-  splitBelow      = "@splitBelow@",
-  splitRight      = "@splitRight@",
+  split           = "@split@",
+  switchBuffer    = "@switchBuffer@",
   barBg           = "@barBg@",
 }
 
@@ -134,10 +133,8 @@ local standard_binds = {
   { mod .. " + RETURN", hl.dsp.window.fullscreen(1) },
 
   -- Screenshots
-  { mod .. " + S", hl.dsp.exec_cmd(paths.screenshotReg) },
-  { mod .. " + SHIFT + S", hl.dsp.exec_cmd(paths.screenshotFull) },
-  { "Print", hl.dsp.exec_cmd(paths.screenshotReg) },
-  { "SHIFT + Print", hl.dsp.exec_cmd(paths.screenshotFull) },
+  { mod .. " + S", hl.dsp.exec_cmd(paths.screenshot .. " region") },
+  { mod .. " + SHIFT + S", hl.dsp.exec_cmd(paths.screenshot .. " full") },
 
   -- Focus (Arrows)
   { mod .. " + left", hl.dsp.focus({ direction = "left" }) },
@@ -222,18 +219,32 @@ end
 hl.bind(mod .. " + X", hl.dsp.submap("emacs_x"))
 
 hl.define_submap("emacs_x", function()
-  local function chord(key, dsp)
+  local function chord(key, action)
     hl.bind(key, function()
-      hl.dispatch(dsp)
+      if type(action) == "function" then
+        action()
+      else
+        hl.dispatch(action)
+      end
       hl.dispatch(hl.dsp.submap("reset"))
     end)
   end
 
   local chords = {
-    { "0",           hl.dsp.exec_raw("movetoworkspacesilent special:minimized") },
+    { "0", function()
+      hl.dispatch(hl.dsp.window.move({ workspace = "special:minimized" }))
+      hl.dispatch(hl.dsp.workspace.toggle_special("minimized"))
+    end },
     { "1",           hl.dsp.window.fullscreen(1) },
-    { "2",           hl.dsp.exec_cmd(paths.splitBelow) },
-    { "3",           hl.dsp.exec_cmd(paths.splitRight) },
+    { "2",           hl.dsp.exec_cmd(paths.split .. " d") },
+    { "3",           hl.dsp.exec_cmd(paths.split .. " r") },
+    { "4",           hl.dsp.exec_cmd(paths.split .. " d") },
+    { "b",           hl.dsp.exec_cmd(paths.switchBuffer) },
+    { "B",           hl.dsp.exec_cmd(paths.switchBuffer) },
+    { "k",           hl.dsp.window.close() },
+    { "K",           hl.dsp.window.close() },
+    { "o",           hl.dsp.window.cycle_next() },
+    { "O",           hl.dsp.window.cycle_next() },
     { "G",           hl.dsp.submap("reset") },
     { "escape",      hl.dsp.submap("reset") },
     { "SUPER + X",   hl.dsp.submap("reset") },

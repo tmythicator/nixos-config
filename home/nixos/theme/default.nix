@@ -29,64 +29,44 @@ let
     hyprlandTheme.mkHyprlandThemeLua tokens.light
   );
 
-  getTheme = pkgs.writeShellScriptBin "get-theme" ''
-    if [ "$(cat "$HOME/.config/timcha-theme/mode" 2>/dev/null)" = "light" ]; then
-      echo '{"text":"Light","class":"light","tooltip":"Theme: Light\nClick to toggle"}'
-    else
-      echo '{"text":"Dark","class":"dark","tooltip":"Theme: Dark\nClick to toggle"}'
-    fi
-  '';
+  getTheme = pkgs.writeShellApplication {
+    name = "get-theme";
+    runtimeInputs = with pkgs; [ coreutils ];
+    text = builtins.readFile ./get-theme.sh;
+  };
 
-  toggleTheme = pkgs.writeShellScriptBin "toggle-theme" ''
-    MODE="$1"
-    STATE_DIR="$HOME/.config/timcha-theme"
-    STATE_FILE="$STATE_DIR/mode"
+  toggleTheme = pkgs.writeShellApplication {
+    name = "toggle-theme";
+    runtimeInputs = with pkgs; [
+      coreutils
+      glib
+      dconf
+      hyprland
+      swaybg
+      procps
+      swaynotificationcenter
+      libnotify
+    ];
+    text = builtins.readFile (
+      pkgs.replaceVars ./toggle-theme.sh {
+        lightWaybarCss = lightWaybarCssDerivation;
+        lightGtkCss = lightGtkCssDerivation;
+        lightFuzzel = lightFuzzelDerivation;
+        lightHyprland = lightHyprlandDerivation;
+        lightGtkColorScheme = tokens.light.gtkColorScheme;
+        lightBarBg = tokens.light.barBg;
 
-    mkdir -p "$STATE_DIR" "$HOME/.config/waybar" "$HOME/.config/swaync" "$HOME/.config/fuzzel" "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0" "$HOME/.config/hypr"
+        darkWaybarCss = darkWaybarCssDerivation;
+        darkGtkCss = darkGtkCssDerivation;
+        darkFuzzel = darkFuzzelDerivation;
+        darkHyprland = darkHyprlandDerivation;
+        darkGtkColorScheme = tokens.dark.gtkColorScheme;
+        darkBarBg = tokens.dark.barBg;
 
-    CURRENT=$(cat "$STATE_FILE" 2>/dev/null || echo "dark")
-    [ "$MODE" = "toggle" ] || [ -z "$MODE" ] && { [ "$CURRENT" = "dark" ] && MODE="light" || MODE="dark"; }
-    echo "$MODE" > "$STATE_FILE"
-
-    case "$MODE" in
-      light)
-        CSS="${lightWaybarCssDerivation}"
-        GTK_CSS="${lightGtkCssDerivation}"
-        FUZZEL="${lightFuzzelDerivation}"
-        HYPR_LUA="${lightHyprlandDerivation}"
-        GTK="${tokens.light.gtkColorScheme}"
-        GTK_THEME="adw-gtk3"
-        ;;
-      *)
-        CSS="${darkWaybarCssDerivation}"
-        GTK_CSS="${darkGtkCssDerivation}"
-        FUZZEL="${darkFuzzelDerivation}"
-        HYPR_LUA="${darkHyprlandDerivation}"
-        GTK="${tokens.dark.gtkColorScheme}"
-        GTK_THEME="adw-gtk3-dark"
-        ;;
-    esac
-
-    ln -sf "$CSS" "$HOME/.config/waybar/theme.css"
-    ln -sf "$CSS" "$HOME/.config/swaync/theme.css"
-    ln -sf "$GTK_CSS" "$HOME/.config/gtk-3.0/gtk.css"
-    ln -sf "$GTK_CSS" "$HOME/.config/gtk-4.0/gtk.css"
-    ln -sf "$FUZZEL" "$HOME/.config/fuzzel/fuzzel.ini"
-    ln -sf "$HYPR_LUA" "$HOME/.config/hypr/theme.lua"
-
-    export GSETTINGS_SCHEMA_DIR="${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas"
-    ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface color-scheme "$GTK" 2>/dev/null || true
-    ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME" 2>/dev/null || true
-    ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'$GTK'" 2>/dev/null || true
-    ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/gtk-theme "'$GTK_THEME'" 2>/dev/null || true
-
-    ${pkgs.hyprland}/bin/hyprctl eval "dofile(os.getenv('HOME') .. '/.config/hypr/theme.lua')" >/dev/null 2>&1 || true
-    ${pkgs.libnotify}/bin/notify-send -t 800 -h string:x-canonical-private-synchronous:theme-notify -u low "󱎖 THEME" "$MODE" >/dev/null 2>&1 &
-
-    ${pkgs.procps}/bin/pkill -SIGUSR2 waybar 2>/dev/null || true
-    ${pkgs.procps}/bin/pkill -RTMIN+8 waybar 2>/dev/null || true
-    ${pkgs.swaynotificationcenter}/bin/swaync-client -R -rs >/dev/null 2>&1 &
-  '';
+        schemaDir = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas";
+      }
+    );
+  };
 in
 {
   home.packages = [
